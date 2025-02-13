@@ -10,29 +10,43 @@
             <h3 class="mb-0"><b>Login</b></h3>
             <a [routerLink]="['/register']" class="link-primary">Don't have an account?</a>
           </div>
-          <div class="form-group mb-3">
-            <label class="form-label" for="email">Email Address</label>
-            <input type="email" class="form-control" id="email" placeholder="Email Address" value="info@codedthemes.com" />
-          </div>
-          <div class="form-group mb-3">
-            <label class="form-label" for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password" value="123456789" />
-          </div>
-          <div class="d-flex mt-1 justify-content-between">
-            <div class="form-check">
-              <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
-              <label class="form-check-label text-muted" for="customCheckc1">Keep me sign in</label>
+
+          <form id="loginform" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group mb-3">
+              <label class="form-label" for="email">Email Address</label>
+              <input type="email" formControlName="email" class="form-control" id="email" placeholder="usuario@correo.com" />
             </div>
-            <h5 class="text-secondary f-w-400"><a href="javascript:">Forgot Password?</a></h5>
-          </div>
-          <div class="d-grid mt-4">
-            <button type="button" class="btn btn-primary">Login</button>
-          </div>
+            <div class="form-group mb-3">
+              <label class="form-label" for="password">Password</label>
+              <input type="password" formControlName="password" class="form-control" id="password"
+                placeholder="Password" />
+            </div>
+            <div class="d-flex mt-1 justify-content-between">
+              <div class="form-check">
+                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
+                <label class="form-check-label text-muted" for="customCheckc1">Keep me sign in</label>
+              </div>
+              <h5 class="text-secondary f-w-400"><a href="javascript:">Forgot Password?</a></h5>
+            </div>
+            <div class="d-grid mt-4">
+              <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">LogIn</button>
+            </div>
+          </form>
+
           <div class="saprator mt-3">
             <span>Login with</span>
           </div>
           <div class="row">
-
+            @for (item of SignInOptions; track item) {
+            <div class="col-4">
+              <div class="d-grid">
+                <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
+                  <img src="{{ item.image }}" alt="google img" />
+                  <span class="d-none d-sm-inline-block">{{ item.name }}</span>
+                </button>
+              </div>
+            </div>
+            }
           </div>
         </div>
       </div>
@@ -46,144 +60,13 @@
         <div class="col-auto my-1">
           <ul class="list-inline footer-link mb-0">
             <li class="list-inline-item"><a href="https://codedthemes.com/" target="_blank">Home</a></li>
-            <li class="list-inline-item"><a href="https://codedthemes.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
-            <li class="list-inline-item"><a href="https://codedthemes.support-hub.io/" target="_blank">Contact us</a></li>
+            <li class="list-inline-item"><a href="https://codedthemes.com/privacy-policy/" target="_blank">Privacy
+                Policy</a></li>
+            <li class="list-inline-item"><a href="https://codedthemes.support-hub.io/" target="_blank">Contact us</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<!-- ============================================================== -->
-<!-- Main wrapper - style you can find in pages.scss -->
-<!-- ============================================================== -->
-<section id="wrapper" class="login-register login-sidebar"
-    style="background-image:url(../assets/images/background/login-register.jpg);">
-
-    <div class="login-box card">
-        <div class="card-body">
-
-            <form id="loginform" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <a href="javascript:void(0)" class="text-center db"><img src="../assets/images/logo-icon.png"
-                        alt="Home" /><br /><img src="../assets/images/logo-text.png" alt="Home" /></a>
-
-                <div class="form-group m-t-40">
-                    <div class="col-xs-12">
-                        <input class="form-control" type="email" formControlName="email" required=""
-                            placeholder="usuario@ejemplo.com">
-                    </div>
-                    <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
-                        class="text-red-500 text-sm mt-1">
-                        Ingresa un correo válido.
-                    </div>
-                </div>
-
-
-
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <input class="form-control"  id="password" type="password" formControlName="password" required="" placeholder="Password">
-                    </div>
-                </div>
-
-
-                <div class="form-group row">
-                    <div class="col-md-12">
-                        <div class="checkbox checkbox-primary pull-left p-t-0">
-                            <input id="checkbox-signup" type="checkbox" class="filled-in chk-col-light-blue">
-                            <label for="checkbox-signup"> Remember me </label>
-                        </div>
-                        <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i
-                                class="fa fa-lock m-r-5"></i> Forgot pwd?</a>
-                    </div>
-                </div>
-
-                <div class="form-group text-center m-t-20">
-                    <div class="col-xs-12">
-                        <button type="submit" [disabled]="loginForm.invalid"class="btn btn-info btn-lg btn-block text-uppercase btn-rounded">LogIn</button>
-                    </div>
-                </div>
-
-
-                <div class="form-group m-b-0">
-                    <div class="col-sm-12 text-center">
-                        No tienes cuenta de usaurio? <a href="pages-register2.html" class="text-primary m-l-5"><b>Sign Up</b></a>
-                    </div>
-                </div>
-            </form>
-
-
-            <form class="form-horizontal" id="recoverform" action="index.html">
-                <div class="form-group ">
-                    <div class="col-xs-12">
-                        <h3>Recover Password</h3>
-                        <p class="text-muted">Enter your Email and instructions will be sent to you! </p>
-                    </div>
-                </div>
-                <div class="form-group ">
-                    <div class="col-xs-12">
-                        <input class="form-control" type="text" required="" placeholder="Email">
-                    </div>
-                </div>
-                <div class="form-group text-center m-t-20">
-                    <div class="col-xs-12">
-                        <button  class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light"
-                            type="submit">Reset</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</section>
-<!-- ============================================================== -->
-<!-- End Wrapper -->
-<!-- ============================================================== -->
-
-<div class="flex items-center justify-center min-h-screen bg-gray-100">
-    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
-        <h2 class="text-2xl font-semibold text-center mb-6 text-primary">Iniciar Sesión</h2>
-
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <!-- Email -->
-            <div class="mb-4">
-                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
-                <input id="email" type="email" formControlName="email"
-                    class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary-light"
-                    placeholder="usuario@ejemplo.com" />
-                <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
-                    class="text-red-500 text-sm mt-1">
-                    Ingresa un correo válido.
-                </div>
-            </div>
-
-            <!-- Contraseña -->
-            <div class="mb-6">
-                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
-                <input id="password" type="password" formControlName="password"
-                    class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary-light"
-                    placeholder="••••••••" />
-                <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
-                    class="text-red-500 text-sm mt-1">
-                    Ingresa tu contraseña.
-                </div>
-            </div>
-
-            <!-- Mensaje de error -->
-            <div *ngIf="errorMessage" class="text-red-500 text-sm text-center mb-4">
-                {{ errorMessage }}
-            </div>
-
-            <!-- Botón Iniciar Sesión -->
-            <button type="submit" [disabled]="loginForm.invalid"
-                class="w-full bg-primary text-white py-2 rounded hover:bg-primary-light focus:outline-none focus:ring-2 focus:ring-primary-light">
-                Iniciar Sesión
-            </button>
-
-            <!-- Enlace de Recuperación -->
-            <p class="mt-4 text-sm text-center text-gray-600">
-                <a routerLink="/auth/recovery" class="text-primary hover:underline">¿Olvidaste tu contraseña?</a>
-            </p>
-        </form>
-    </div>
 </div>

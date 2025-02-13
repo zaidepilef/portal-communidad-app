@@ -8,18 +8,17 @@ import { GuestLayoutComponent } from './theme/layouts/guest-layout/guest-layout.
 
 const routes: Routes = [
 
-
   {
-		path: 'dashboard',
-		loadComponent: () => AdminComponent,
-		loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-		//canActivate: [AuthGuard]  // Protegemos la ruta con el guard
-	},
-	{
-		path: 'auth',
-		loadComponent: () => GuestLayoutComponent,
-		loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
-	},
+    path: 'auth',
+    loadComponent: () => GuestLayoutComponent,
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: 'dashboard',
+    loadComponent: () => AdminComponent,
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+    //canActivate: [AuthGuard]  // Protegemos la ruta con el guard
+  },
   {
     path: 'authdemo',
     component: GuestLayoutComponent,
@@ -39,7 +38,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
-	exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

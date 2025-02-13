@@ -1,51 +1,155 @@
-/*
-Template Name: Admin pro Admin
-Author: Wrappixel
-Email: niravjoshi87@gmail.com
-File: scss
-*/
-/*
-Template Name: Admin Pro Admin
-Author: Wrappixel
-Email: niravjoshi87@gmail.com
-File: scss
-*/
-/*Theme Colors*/
-/*bootstrap Color*/
-/*Light colors*/
-/*Normal Color*/
-/*Extra Variable*/
-/*******************
-Login register and recover password Page
-******************/
-.login-register {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+// =======================================
+//   List of variables for Preset color
+// =======================================
+
+// Gray color
+$white: #ffffff;
+$gray-100: #fafafa;
+$gray-200: #f5f5f5;
+$gray-300: #f0f0f0;
+$gray-400: #d9d9d9;
+$gray-500: #bfbfbf;
+$gray-600: #8c8c8c;
+$gray-700: #595959;
+$gray-800: #262626;
+$gray-900: #141414;
+$black: #000000;
+
+$blue: #1677ff;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red: #ff4d4f;
+$orange: #fd7e14;
+$yellow: #faad14;
+$green: #52c41a;
+$teal: #20c997;
+$cyan: #13c2c2;
+
+$blue-100: tint-color($blue, 80%);
+$blue-200: tint-color($blue, 60%);
+$blue-300: tint-color($blue, 40%);
+$blue-400: tint-color($blue, 20%);
+$blue-500: $blue;
+$blue-600: shade-color($blue, 20%);
+$blue-700: shade-color($blue, 40%);
+$blue-800: shade-color($blue, 60%);
+$blue-900: shade-color($blue, 80%);
+
+$preset-colors: (
+  preset-1: (
+    primary: #1890ff
+  )
+);
+$dark-bg-color: #121212;
+
+.auth-main {
+  position: relative;
+
+  .auth-wrapper {
     height: 100%;
     width: 100%;
-    padding: 10% 0;
-    position: fixed; }
-  
-  .login-box {
-    width: 400px;
-    margin: 0 auto; }
-    .login-box .footer {
+    min-height: 100vh;
+
+    .saprator {
+      position: relative;
+      display: flex;
+      align-self: center;
+      justify-content: center;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--bs-border-color);
+        z-index: 1;
+      }
+
+      span {
+        font-size: 0.875rem;
+        padding: 8px 24px;
+        background: $white;
+        z-index: 5;
+        text-transform: capitalize;
+        color: $gray-800;
+        font-weight: 500;
+      }
+    }
+
+    &.v3 {
+      display: flex;
+      align-items: center;
+
+      .auth-form {
+        flex-direction: column;
+        background: url('../../../assets/images/authentication/img-auth-bg.svg');
+        min-height: 100vh;
+        padding: 24px;
+        background-repeat: no-repeat;
+        background-size: auto 82%;
+        background-position: left bottom;
+        position: relative;
+        justify-content: space-between;
+        > * {
+          position: relative;
+          z-index: 5;
+        }
+        &:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba($white, 0.2);
+          backdrop-filter: blur(16px);
+        }
+      }
+    }
+    .auth-form {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+
+      .card {
+        width: 100%;
+        max-width: 495px;
+        box-shadow: none;
+      }
+
+      img + span {
+        padding-left: 15px;
+      }
+
+      h5 {
+        span {
+          text-decoration: underline;
+        }
+      }
+    }
+    .auth-footer,
+    .auth-header {
       width: 100%;
-      left: 0px;
-      right: 0px; }
-    .login-box .social {
-      display: block;
-      margin-bottom: 30px; }
-  
-  #recoverform {
-    display: none; }
-  
-  .login-sidebar {
-    padding: 0px;
-    margin-top: 0px; }
-    .login-sidebar .login-box {
-      right: 0px;
-      position: absolute;
-      height: 100%; }
-  
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}
+
+form i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px -12px 0px 0px;
+  cursor: pointer;
+  padding: 12px;
+  font-size: 18px;
+  position: absolute;
+  top: 203px;
+  right: 45px;
+}

@@ -12,9 +12,26 @@ import { CommonModule } from '@angular/common';
 })
 
 export class LoginComponent {
+
   private authService = inject(AuthService); // ✅ Inyección con `inject()`
 	loginForm: FormGroup;
 	errorMessage: string | null = null;
+
+   // public method
+   SignInOptions = [
+    {
+      image: 'assets/images/authentication/google.svg',
+      name: 'Google'
+    },
+    {
+      image: 'assets/images/authentication/twitter.svg',
+      name: 'Twitter'
+    },
+    {
+      image: 'assets/images/authentication/facebook.svg',
+      name: 'Facebook'
+    }
+  ];
 
 	constructor(
 		private fb: FormBuilder,
@@ -37,7 +54,7 @@ export class LoginComponent {
 			next: (response) => {
 
 				this.authService.saveToken(response);
-				this.router.navigate(['/home']); // Redirigir al Dashboard
+				this.router.navigate(['/dashboard']); // Redirigir al Dashboard
 			},
 			error: (err) => {
 				this.errorMessage = 'Correo o contraseña incorrectos';
