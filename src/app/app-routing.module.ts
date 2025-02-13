@@ -7,35 +7,21 @@ import { AdminComponent } from './theme/layouts/admin-layout/admin-layout.compon
 import { GuestLayoutComponent } from './theme/layouts/guest-layout/guest-layout.component';
 
 const routes: Routes = [
+
+
   {
-    path: '',
-    component: AdminComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: '/dashboard/default',
-        pathMatch: 'full'
-      },
-      {
-        path: 'dashboard/default',
-        loadComponent: () => import('./demo/dashboard/default/default.component').then((c) => c.DefaultComponent)
-      },
-      {
-        path: 'typography',
-        loadComponent: () => import('./demo/component/basic-component/color/color.component').then((c) => c.ColorComponent)
-      },
-      {
-        path: 'color',
-        loadComponent: () => import('./demo/component/basic-component/typography/typography.component').then((c) => c.TypographyComponent)
-      },
-      {
-        path: 'sample-page',
-        loadComponent: () => import('./demo/others/sample-page/sample-page.component').then((c) => c.SamplePageComponent)
-      }
-    ]
-  },
+		path: 'dashboard',
+		loadComponent: () => AdminComponent,
+		loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+		//canActivate: [AuthGuard]  // Protegemos la ruta con el guard
+	},
+	{
+		path: 'auth',
+		loadComponent: () => GuestLayoutComponent,
+		loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+	},
   {
-    path: '',
+    path: 'authdemo',
     component: GuestLayoutComponent,
     children: [
       {
@@ -49,10 +35,11 @@ const routes: Routes = [
       }
     ]
   }
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
