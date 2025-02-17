@@ -47,7 +47,7 @@ export class BreadcrumbComponent {
   // constructor
   constructor() {
     this.navigations = NavigationItems;
-    this.type = 'theme1';
+    this.type = 'theme2';
     this.setBreadcrumb();
     this.iconService.addIcon(...[GlobalOutline, NodeExpandOutline]);
   }

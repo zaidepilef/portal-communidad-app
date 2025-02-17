@@ -30,9 +30,9 @@ export const NavigationItems: NavigationItem[] = [
         title: 'Default',
         type: 'item',
         classes: 'nav-item',
-        url: '/dashboard/home',
+        url: '/dashboard/default',
         icon: 'dashboard',
-        breadcrumbs: false
+        breadcrumbs: true
       },
       {
         id: 'empresas',
@@ -41,7 +41,7 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         url: '/dashboard/empresas',
         icon: 'dashboard',
-        breadcrumbs: false
+        breadcrumbs: true
       },
       {
         id: 'condominios',
@@ -50,7 +50,7 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         url: '/dashboard/condominios',
         icon: 'dashboard',
-        breadcrumbs: false
+        breadcrumbs: true
       },
       {
         id: 'unidades',
@@ -59,7 +59,7 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         url: '/dashboard/unidades',
         icon: 'dashboard',
-        breadcrumbs: false
+        breadcrumbs: true
       }
     ]
   },
@@ -94,8 +94,8 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         url: '/dashboard/usuarios',
         icon: 'login',
-        target: true,
-        breadcrumbs: false
+        target: false,
+        breadcrumbs: true
       },
       {
         id: 'perfiles',
@@ -104,8 +104,8 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         url: '/dashboard/roles',
         icon: 'login',
-        target: true,
-        breadcrumbs: false
+        target: false,
+        breadcrumbs: true
       }
     ]
   },
@@ -130,10 +130,39 @@ export const NavigationItems: NavigationItem[] = [
         type: 'item',
         classes: 'nav-item',
         url: 'dashboard/gastos',
-        icon: 'question',
-        target: true,
-        external: true
+        icon: 'question'
+      }
+    ]
+  },
+
+  {
+    id: 'ejemplo',
+    title: 'Ejemplo',
+    hidden: false,
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'hijouno',
+        title: 'hijouno',
+        type: 'item',
+        url: 'dashboard/hijouno',
+        classes: 'nav-item',
+        icon: 'chrome'
+      },
+      {
+        id: 'hijodos',
+        title: 'hijodos',
+        type: 'item',
+        classes: 'nav-item',
+        url: 'dashboard/hijodos',
+        icon: 'question'
       }
     ]
   }
+
+
+
+
+
 ];

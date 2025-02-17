@@ -1,4 +1,5 @@
 @for (breadcrumb of navigationList; track breadcrumb; let last = $last) {
+
   @if (last && breadcrumb.breadcrumbs !== false) {
     <div class="page-header">
       <div class="page-block">
@@ -6,12 +7,9 @@
           <div class="col-md-12">
             <ul class="breadcrumb">
               <li class="breadcrumb-item">
-                @if (type === 'theme2') {
-                  <a [routerLink]="['/dashboard/analytics/']" title="Home" class="home"><i class="feather icon-home"></i></a>
-                }
-                @if (type === 'theme1') {
-                  <a [routerLink]="['/dashboard/analytics/']" class="home">Home</a>
-                }
+                <a [routerLink]="['/dashboard/']" title="Home" class="home"><i class="feather icon-home"></i></a>
+                <a [routerLink]="['/dashboard/']" class="home">Home</a>
+
               </li>
               @for (breadcrumb of navigationList; track breadcrumb) {
                 @if (breadcrumb.url !== false) {
@@ -27,6 +25,7 @@
               }
             </ul>
           </div>
+
           <div class="col-md-12">
             <div class="page-header-title">
               @for (breadcrumb of navigationList; track breadcrumb; let last = $last) {
@@ -35,6 +34,7 @@
                 }
               }
             </div>
+
           </div>
         </div>
       </div>
