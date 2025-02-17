@@ -19,21 +19,7 @@ export class LoginComponent implements OnDestroy  {
 	loginForm: FormGroup;
 	errorMessage: string | null = null;
 
-   // public method
-   SignInOptions = [
-    {
-      image: 'assets/images/authentication/google.svg',
-      name: 'Google'
-    },
-    {
-      image: 'assets/images/authentication/twitter.svg',
-      name: 'Twitter'
-    },
-    {
-      image: 'assets/images/authentication/facebook.svg',
-      name: 'Facebook'
-    }
-  ];
+
 
 	constructor(
 		private fb: FormBuilder,
@@ -45,8 +31,7 @@ export class LoginComponent implements OnDestroy  {
 		});
 	}
 
-
-	onSubmit() {
+  onSubmit() {
 
 		if (this.loginForm.invalid) return;
 
