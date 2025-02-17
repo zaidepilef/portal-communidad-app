@@ -14,7 +14,8 @@
           <form id="loginform" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="form-group mb-3">
               <label class="form-label" for="email">Email Address</label>
-              <input type="email" formControlName="email" class="form-control" id="email" placeholder="usuario@correo.com" />
+              <input type="email" formControlName="email" class="form-control" id="email"
+                placeholder="usuario@correo.com" />
             </div>
             <div class="form-group mb-3">
               <label class="form-label" for="password">Password</label>
@@ -32,12 +33,15 @@
               <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">LogIn</button>
             </div>
           </form>
-
+          <!--
           <div class="saprator mt-3">
             <span>Login with</span>
           </div>
+          -->
           <div class="row">
+
             @for (item of SignInOptions; track item) {
+            <!--
             <div class="col-4">
               <div class="d-grid">
                 <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
@@ -46,6 +50,7 @@
                 </button>
               </div>
             </div>
+            -->
             }
           </div>
         </div>

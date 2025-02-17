@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-login',
@@ -11,9 +12,10 @@ import { CommonModule } from '@angular/common';
 	styleUrl: './login.component.scss'
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnDestroy  {
 
   private authService = inject(AuthService); // ✅ Inyección con `inject()`
+  private subscription: Subscription | null = null;
 	loginForm: FormGroup;
 	errorMessage: string | null = null;
 
@@ -62,6 +64,10 @@ export class LoginComponent {
 			}
 		});
 	}
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe(); // ✅ Cerrar la conexión cuando el componente se destruya
+  }
 }
 
 
