@@ -33,18 +33,79 @@ export const NavigationItems: NavigationItem[] = [
         url: '/dashboard/default',
         icon: 'dashboard',
         breadcrumbs: false
+      },
+      {
+        id: 'empresas',
+        title: 'Empresas',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/dashboard/empresas',
+        icon: 'dashboard',
+        breadcrumbs: false
+      },
+      {
+        id: 'condominios',
+        title: 'Condominios',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/dashboard/condominios',
+        icon: 'dashboard',
+        breadcrumbs: false
+      },
+      {
+        id: 'unidades',
+        title: 'Unidades',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/dashboard/unidades',
+        icon: 'dashboard',
+        breadcrumbs: false
       }
     ]
   },
   {
-    id: 'authentication',
-    title: 'Authentication',
+    id: 'utilities',
+    title: 'UI Components',
     type: 'group',
     icon: 'icon-navigation',
     children: [
       {
-        id: 'login',
-        title: 'Login',
+        id: 'usuarios',
+        title: 'Usuarios',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/typography',
+        icon: 'font-size'
+      },
+      {
+        id: 'roles',
+        title: 'Roles',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/color',
+        icon: 'bg-colors'
+      },
+      {
+        id: 'tabler',
+        title: 'Tabler',
+        type: 'item',
+        classes: 'nav-item',
+        url: 'https://ant.design/components/icon',
+        icon: 'ant-design',
+        target: true,
+        external: true
+      }
+    ]
+  },
+  {
+    id: 'accesos',
+    title: 'Accesos',
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'usuarios',
+        title: 'Usuarios',
         type: 'item',
         classes: 'nav-item',
         url: '/login',
@@ -53,8 +114,18 @@ export const NavigationItems: NavigationItem[] = [
         breadcrumbs: false
       },
       {
-        id: 'register',
-        title: 'Register',
+        id: 'perfiles',
+        title: 'Perfiles',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/login',
+        icon: 'login',
+        target: true,
+        breadcrumbs: false
+      },
+      {
+        id: 'perfiles',
+        title: 'Perfiles',
         type: 'item',
         classes: 'nav-item',
         url: '/register',

@@ -1,23 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 
 @Injectable({
   providedIn: 'root' // ✅ Esto asegura que Angular inyecte el servicio globalmente
 })
-export class AuthService {
+export class AuthService implements OnDestroy {
 
 	private apiUrl = environment.apiUrl; // Usa la URL de la API desde environment.ts
-
+  private destroy$ = new Subject<void>(); // 👈 Se usará para cerrar conexiones
 	constructor(private http: HttpClient, private router: Router) { }
 
 	// Iniciar sesión
 	login(credentials: { email: string; password: string }): Observable<any> {
-		return this.http.post(`${this.apiUrl}/login`, credentials);
+		return this.http.post(`${this.apiUrl}/login`, credentials).pipe(takeUntil(this.destroy$)); // 👈 Cierra la conexión si el servicio se destruye
 	}
 
 	// Guardar el token en localStorage
@@ -58,5 +58,10 @@ export class AuthService {
 		localStorage.removeItem('token_expires_at');
 		this.router.navigate(['/auth']); // Redirigir a login
 	}
+
+  ngOnDestroy(): void {
+    this.destroy$.next(); // 👈 Notifica a las suscripciones que se deben cancelar
+    this.destroy$.complete();
+  }
 
 }

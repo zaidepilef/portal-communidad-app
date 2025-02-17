@@ -105,7 +105,7 @@ export class NavRightComponent {
     },
     {
       icon: 'unordered-list',
-      title: 'History'
+      title: 'Historial'
     }
   ];
 }

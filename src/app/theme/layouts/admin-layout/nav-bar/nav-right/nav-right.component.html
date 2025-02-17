@@ -107,13 +107,13 @@
           <a href="javascript:" class="bg-transparent"><i class="d-flex f-20" antIcon theme="outline" type="logout"></i></a>
         </div>
       </div>
+
       <ul ngbNav #nav="ngbNav" class="nav drp-tabs nav-fill nav-tabs">
         <li ngbNavItem="1">
-          <a ngbNavLink>
-            <i antIcon theme="outline" type="user" class="me-2"></i>
-            Profile
-          </a>
+          <a ngbNavLink><i antIcon theme="outline" type="user" class="me-2"></i>Profile</a>
+
           <ng-template ngbNavContent>
+
             @for (task of profile; track task) {
               <div>
                 <a class="dropdown-item">
@@ -122,14 +122,18 @@
                 </a>
               </div>
             }
+
             <div>
               <a class="dropdown-item">
                 <i class="text-muted" antIcon theme="outline" type="logout"></i>
                 <span>Logout</span>
               </a>
             </div>
+
           </ng-template>
+
         </li>
+
         <li ngbNavItem="2">
           <a ngbNavLink>
             <i class="me-2" antIcon theme="outline" type="setting"></i>
@@ -146,7 +150,9 @@
             }
           </ng-template>
         </li>
+
       </ul>
+
       <div [ngbNavOutlet]="nav"></div>
     </div>
   </li>
