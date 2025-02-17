@@ -20,8 +20,8 @@ export interface NavigationItem {
 
 export const NavigationItems: NavigationItem[] = [
   {
-    id: 'dashboard',
-    title: 'Dashboard',
+    id: 'administrar',
+    title: 'Administrar',
     type: 'group',
     icon: 'icon-navigation',
     children: [
@@ -30,7 +30,7 @@ export const NavigationItems: NavigationItem[] = [
         title: 'Default',
         type: 'item',
         classes: 'nav-item',
-        url: '/dashboard/default',
+        url: '/dashboard/home',
         icon: 'dashboard',
         breadcrumbs: false
       },
@@ -65,38 +65,22 @@ export const NavigationItems: NavigationItem[] = [
   },
   {
     id: 'utilities',
-    title: 'UI Components',
+    title: 'Utilities',
     type: 'group',
     icon: 'icon-navigation',
     children: [
       {
-        id: 'usuarios',
-        title: 'Usuarios',
+        id: 'settings',
+        title: 'Settings',
         type: 'item',
         classes: 'nav-item',
-        url: '/typography',
+        url: '/dashboard/settings',
         icon: 'font-size'
-      },
-      {
-        id: 'roles',
-        title: 'Roles',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/color',
-        icon: 'bg-colors'
-      },
-      {
-        id: 'tabler',
-        title: 'Tabler',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'https://ant.design/components/icon',
-        icon: 'ant-design',
-        target: true,
-        external: true
       }
+
     ]
   },
+
   {
     id: 'accesos',
     title: 'Accesos',
@@ -108,7 +92,7 @@ export const NavigationItems: NavigationItem[] = [
         title: 'Usuarios',
         type: 'item',
         classes: 'nav-item',
-        url: '/login',
+        url: '/dashboard/usuarios',
         icon: 'login',
         target: true,
         breadcrumbs: false
@@ -118,54 +102,10 @@ export const NavigationItems: NavigationItem[] = [
         title: 'Perfiles',
         type: 'item',
         classes: 'nav-item',
-        url: '/login',
+        url: '/dashboard/roles',
         icon: 'login',
         target: true,
         breadcrumbs: false
-      },
-      {
-        id: 'perfiles',
-        title: 'Perfiles',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/register',
-        icon: 'profile',
-        target: true,
-        breadcrumbs: false
-      }
-    ]
-  },
-  {
-    id: 'utilities',
-    title: 'UI Components',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'typography',
-        title: 'Typography',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/typography',
-        icon: 'font-size'
-      },
-      {
-        id: 'color',
-        title: 'Colors',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/color',
-        icon: 'bg-colors'
-      },
-      {
-        id: 'tabler',
-        title: 'Tabler',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'https://ant.design/components/icon',
-        icon: 'ant-design',
-        target: true,
-        external: true
       }
     ]
   },
@@ -177,19 +117,19 @@ export const NavigationItems: NavigationItem[] = [
     icon: 'icon-navigation',
     children: [
       {
-        id: 'sample-page',
-        title: 'Sample Page',
+        id: 'periodos',
+        title: 'Periodos',
         type: 'item',
-        url: '/sample-page',
+        url: 'dashboard/periodos',
         classes: 'nav-item',
         icon: 'chrome'
       },
       {
-        id: 'document',
-        title: 'Document',
+        id: 'gastos',
+        title: 'Gastos',
         type: 'item',
         classes: 'nav-item',
-        url: 'https://codedthemes.gitbook.io/mantis-angular/',
+        url: 'dashboard/gastos',
         icon: 'question',
         target: true,
         external: true

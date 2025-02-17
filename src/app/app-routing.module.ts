@@ -22,10 +22,6 @@ const routes: Routes = [
     loadComponent: () => GuestLayoutComponent,
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
-
-
-
-
   {
     path: 'authdemo',
     component: GuestLayoutComponent,
@@ -41,7 +37,10 @@ const routes: Routes = [
       }
     ]
   },
-  { path: '**', redirectTo: 'auth/login' }
+  {
+    path: '**',
+    loadComponent: () => import('./theme/layouts/not-found/not-found.component').then(m => m.NotFoundComponent)
+  }
 
 ];
 

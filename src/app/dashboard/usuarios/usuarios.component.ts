@@ -9,13 +9,15 @@ import tableData from 'src/fake-data/default-data.json';
 // icons
 import { IconService } from '@ant-design/icons-angular';
 import { FallOutline, GiftOutline, MessageOutline, RiseOutline, SettingOutline } from '@ant-design/icons-angular/icons';
+import { CardComponent } from "../../theme/shared/components/card/card.component";
 
 
 @Component({
   selector: 'app-default',
   imports: [
     CommonModule,
-  ],
+    CardComponent
+],
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.scss']
 })
