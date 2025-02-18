@@ -9,12 +9,11 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { BreadcrumbComponent } from 'src/app/theme/shared/components/breadcrumb/breadcrumb.component';
-import { CardComponent } from 'src/app/theme/shared/components/card/card.component';
+
 @Component({
   selector: 'app-admin',
   imports: [
     CommonModule,
-    CardComponent,
     BreadcrumbComponent,
     NavigationComponent,
     NavBarComponent,
