@@ -6,68 +6,61 @@
       </div>
       <div class="card my-5">
         <div class="card-body">
+
           <div class="d-flex justify-content-between align-items-end mb-4">
             <h3 class="mb-0"><b>Sign up</b></h3>
             <a [routerLink]="['/auth/login']" class="link-primary">¿Ya tienes cuenta?, Ingresa?</a>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group mb-3">
-                <label class="form-label" for="firstName">First Name*</label>
-                <input type="text" class="form-control" id="firstName" placeholder="First Name" />
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group mb-3">
-                <label class="form-label" for="lastName">Last Name*</label>
-                <input type="text" class="form-control" id="lastName" placeholder="Last Name" />
-              </div>
-            </div>
-          </div>
-          <div class="form-group mb-3">
-            <label class="form-label" for="company">Company</label>
-            <input type="text" class="form-control" id="company" placeholder="Company" />
-          </div>
-          <div class="form-group mb-3">
-            <label class="form-label" for="emailAddress">Email Address*</label>
-            <input type="email" class="form-control" id="emailAddress" placeholder="Email Address" />
-          </div>
-          <div class="form-group mb-3">
-            <label class="form-label" for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password" />
-          </div>
-          <p class="mt-4 text-sm text-muted">
-            By Signing up, you agree to our
-            <a href="javascript:" class="text-primary">Terms of Service</a>
-            and
-            <a href="javascript:" class="text-primary">Privacy Policy</a>
-          </p>
-          <div class="d-grid mt-3">
-            <button type="button" class="btn btn-primary">Create Account</button>
-          </div>
+          <form id="registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
-          <div class="row">
+            <div class="form-group mb-3">
+              <label class="form-label" for="username">Usuario</label>
+              <input type="text" class="form-control" formControlName="username" id="username" placeholder="Usuario" />
+            </div>
 
-          </div>
+            <div class="form-group mb-3">
+              <label class="form-label" for="email">Email</label>
+              <input type="email" class="form-control" formControlName="email" id="email" placeholder="Email" />
+            </div>
+
+            <div class="form-group mb-3">
+              <label class="form-label" for="password">Password</label>
+              <input type="password" class="form-control" formControlName="password" id="password"
+                placeholder="Password" />
+            </div>
+
+            <div class="form-group mb-3">
+              <label class="form-label" for="confirmpassword">Confirmar Password</label>
+              <input type="password" class="form-control" formControlName="confirmpassword" id="confirmpassword"
+                placeholder="Confirma Password" />
+            </div>
+
+            <div class="d-grid mt-3">
+              <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">Crear Cuenta</button>
+            </div>
+
+            <!-- GIF de Carga -->
+            <div *ngIf="isLoading" class="loading-overlay">
+              <img src="assets/images/loading.svg" alt="Cargando...">
+            </div>
+          </form>
         </div>
       </div>
+
+
       <div class="auth-footer row">
-        <!-- <div class=""> -->
         <div class="col my-1">
           <p class="m-0">
-            Copyright ©
-            <a href="https://codedthemes.com/" target="_blank">CodedThemes</a>
+            Copyright ©<a href="https://codedthemes.com/" target="_blank">Ougt Malakias</a>
           </p>
         </div>
         <div class="col-auto my-1">
           <ul class="list-inline footer-link mb-0">
-            <li class="list-inline-item"><a href="https://codedthemes.com/" target="_blank">Home</a></li>
-            <li class="list-inline-item"><a href="https://codedthemes.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
-            <li class="list-inline-item"><a href="https://codedthemes.support-hub.io/" target="_blank">Contact us</a></li>
+            <li class="list-inline-item"><a href="https://ougt.cl/" target="_blank">Contacto</a></li>
           </ul>
         </div>
-        <!-- </div> -->
       </div>
+
     </div>
   </div>
 </div>
@@ -85,14 +78,11 @@
       <!-- Usuario -->
       <div class="mb-4">
         <label for="username" class="block text-sm font-medium mb-1">Usuario</label>
-        <input
-          id="username"
-          type="text"
-          formControlName="username"
+        <input id="username" type="text" formControlName="username"
           class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Nombre de usuario"
-        />
-        <div NgIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="text-red-500 text-sm">
+          placeholder="Nombre de usuario" />
+        <div NgIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched"
+          class="text-red-500 text-sm">
           El campo Usuario es obligatorio.
         </div>
       </div>
@@ -100,13 +90,9 @@
       <!-- Nombre -->
       <div class="mb-4">
         <label for="name" class="block text-sm font-medium mb-1">Nombre</label>
-        <input
-          id="name"
-          type="text"
-          formControlName="name"
+        <input id="name" type="text" formControlName="name"
           class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Tu nombre"
-        />
+          placeholder="Tu nombre" />
         <div NgIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="text-red-500 text-sm">
           El campo Nombre es obligatorio.
         </div>
@@ -115,14 +101,11 @@
       <!-- Apellido -->
       <div class="mb-4">
         <label for="lastname" class="block text-sm font-medium mb-1">Apellido</label>
-        <input
-          id="lastname"
-          type="text"
-          formControlName="lastname"
+        <input id="lastname" type="text" formControlName="lastname"
           class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Tu apellido"
-        />
-        <div NgIf="registerForm.get('lastname')?.invalid && registerForm.get('lastname')?.touched" class="text-red-500 text-sm">
+          placeholder="Tu apellido" />
+        <div NgIf="registerForm.get('lastname')?.invalid && registerForm.get('lastname')?.touched"
+          class="text-red-500 text-sm">
           El campo Apellido es obligatorio.
         </div>
       </div>
@@ -130,24 +113,18 @@
       <!-- Email -->
       <div class="mb-6">
         <label for="email" class="block text-sm font-medium mb-1">Correo Electrónico</label>
-        <input
-          id="email"
-          type="email"
-          formControlName="email"
+        <input id="email" type="email" formControlName="email"
           class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="usuario@ejemplo.com"
-        />
-        <div NgIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="text-red-500 text-sm">
+          placeholder="usuario@ejemplo.com" />
+        <div NgIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+          class="text-red-500 text-sm">
           Ingresa un correo válido.
         </div>
       </div>
 
       <!-- Botón -->
-      <button
-        type="submit"
-        [disabled]="registerForm.invalid"
-        class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-      >
+      <button type="submit" [disabled]="registerForm.invalid"
+        class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
         Registrarse
       </button>
     </form>

@@ -18,7 +18,7 @@ export class LoginComponent implements OnDestroy  {
   private subscription: Subscription | null = null;
 	loginForm: FormGroup;
 	errorMessage: string | null = null;
-
+  isLoading = false; // ✅ Variable para controlar el GIF de carga
 
 
 	constructor(
@@ -34,18 +34,20 @@ export class LoginComponent implements OnDestroy  {
   onSubmit() {
 
 		if (this.loginForm.invalid) return;
+    this.isLoading = true; // ✅ Mostrar GIF de carga
 
 		const credentials = this.loginForm.value;
 
 		this.authService.login(credentials).subscribe({
 			next: (response) => {
-
+        this.isLoading = false; // ✅ Ocultar GIF al recibir respuesta
 				this.authService.saveToken(response);
 				this.router.navigate(['/dashboard']); // Redirigir al Dashboard
 			},
 			error: (err) => {
 				this.errorMessage = 'Correo o contraseña incorrectos';
 				console.error('Error en login', err);
+        this.isLoading = false; // ✅ Ocultar GIF si hay error
 			}
 		});
 	}

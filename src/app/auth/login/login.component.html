@@ -12,7 +12,7 @@
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-end mb-4">
             <h3 class="mb-0"><b>Login</b></h3>
-            <a [routerLink]="['/auth/register']" class="link-primary">No tienes cuenta?, crea una</a>
+            <a [routerLink]="['/auth/register']" class="link-primary">¿No tienes cuenta?, crea una</a>
           </div>
 
           <form id="loginform" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -38,9 +38,9 @@
             </div>
           </form>
 
-          <div class="row">
-
-
+           <!-- GIF de Carga -->
+           <div *ngIf="isLoading" class="loading-overlay">
+            <img src="assets/images/loading.svg" alt="Cargando...">
           </div>
         </div>
       </div>

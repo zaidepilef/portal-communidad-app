@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {FormsModule , ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, ReactiveFormsModule,CommonModule,RouterModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, RouterModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -26,18 +26,20 @@ import { RouterModule } from '@angular/router';
  */
 export class RegisterComponent {
   registerForm: FormGroup;
+  isLoading = false; // ✅ Variable para controlar el GIF de carga
 
   constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
-      name: ['', Validators.required],
-      lastname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      confirmpassword: ['', [Validators.required]],
     });
   }
 
   onSubmit(): void {
     if (this.registerForm.valid) {
+      this.isLoading = false; // ✅ Ocultar GIF si hay error
       console.log('Formulario enviado:', this.registerForm.value);
     } else {
       console.log('Formulario inválido');

@@ -153,3 +153,20 @@ form i {
   top: 203px;
   right: 45px;
 }
+
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-overlay img {
+  width: 100px;
+}
