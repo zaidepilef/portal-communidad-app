@@ -7,12 +7,12 @@ import { environment } from '../../environments/environment';
 import { Injectable, OnDestroy } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root' // ✅ Esto asegura que Angular inyecte el servicio globalmente
+	providedIn: 'root' // ✅ Esto asegura que Angular inyecte el servicio globalmente
 })
 export class AuthService implements OnDestroy {
 
 	private apiUrl = environment.apiUrl; // Usa la URL de la API desde environment.ts
-  private destroy$ = new Subject<void>(); // 👈 Se usará para cerrar conexiones
+	private destroy$ = new Subject<void>(); // 👈 Se usará para cerrar conexiones
 	constructor(private http: HttpClient, private router: Router) { }
 
 	// Iniciar sesión
@@ -59,9 +59,9 @@ export class AuthService implements OnDestroy {
 		this.router.navigate(['/auth']); // Redirigir a login
 	}
 
-  ngOnDestroy(): void {
-    this.destroy$.next(); // 👈 Notifica a las suscripciones que se deben cancelar
-    this.destroy$.complete();
-  }
+	ngOnDestroy(): void {
+		this.destroy$.next(); // 👈 Notifica a las suscripciones que se deben cancelar
+		this.destroy$.complete();
+	}
 
 }
