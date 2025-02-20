@@ -4,10 +4,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 @Component({
-  selector: 'app-register',
-  imports: [FormsModule, ReactiveFormsModule, CommonModule, RouterModule],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+	selector: 'app-register',
+	imports: [FormsModule, ReactiveFormsModule, CommonModule, RouterModule],
+	templateUrl: './register.component.html',
+	styleUrl: './register.component.scss'
 })
 /**
  * @class RegisterComponent
@@ -25,24 +25,24 @@ import { RouterModule } from '@angular/router';
  * and logs the form values to the console if it is valid, or logs an invalid form message if it is not.
  */
 export class RegisterComponent {
-  registerForm: FormGroup;
-  isLoading = false; // ✅ Variable para controlar el GIF de carga
+	registerForm: FormGroup;
+	isLoading = false; // ✅ Variable para controlar el GIF de carga
 
-  constructor(private fb: FormBuilder) {
-    this.registerForm = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      confirmpassword: ['', [Validators.required]],
-    });
-  }
+	constructor(private fb: FormBuilder) {
+		this.registerForm = this.fb.group({
+			username: ['', Validators.required],
+			email: ['', [Validators.required, Validators.email]],
+			password: ['', [Validators.required]],
+			confirmpassword: ['', [Validators.required]],
+		});
+	}
 
-  onSubmit(): void {
-    if (this.registerForm.valid) {
-      this.isLoading = false; // ✅ Ocultar GIF si hay error
-      console.log('Formulario enviado:', this.registerForm.value);
-    } else {
-      console.log('Formulario inválido');
-    }
-  }
+	onSubmit(): void {
+		if (this.registerForm.valid) {
+			this.isLoading = false; // ✅ Ocultar GIF si hay error
+			console.log('Formulario enviado:', this.registerForm.value);
+		} else {
+			console.log('Formulario inválido');
+		}
+	}
 }

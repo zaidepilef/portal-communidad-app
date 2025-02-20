@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, inject, OnInit } from '@angular/core';
-import { CardComponent } from "../../theme/shared/components/card/card.component";
 import { EmpresasService } from 'src/app/services/empresas.service';
 
 @Component({
 	selector: 'app-empresas',
-	imports: [CardComponent],
+	imports: [],
 	templateUrl: './empresas.component.html',
 	styleUrl: './empresas.component.scss'
 })

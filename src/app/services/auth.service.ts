@@ -20,12 +20,15 @@ export class AuthService implements OnDestroy {
 		return this.http.post(`${this.apiUrl}/login`, credentials); // 👈 Cierra la conexión si el servicio se destruye
 	}
 
-	// Guardar el token en localStorage
+	// Iniciar sesión
+	recovery(credentials: { email: string; password: string }): Observable<any> {
+		return this.http.post(`${this.apiUrl}/login`, credentials); // 👈 Cierra la conexión si el servicio se destruye
+	}
+
+
 	// Guardar el token y la expiración en LocalStorage
 	saveToken(response: any): void {
-
 		localStorage.setItem('access_token', response.access_token);
-
 		// Guardar la fecha de expiración en milisegundos
 		const expirationTime = new Date().getTime() + response.expires_in * 1000;
 		localStorage.setItem('token_expires_at', expirationTime.toString());
