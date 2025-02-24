@@ -20,9 +20,21 @@ export class AuthService implements OnDestroy {
 		return this.http.post(`${this.apiUrl}/login`, credentials); // 👈 Cierra la conexión si el servicio se destruye
 	}
 
+
+
 	// Iniciar sesión
-	recovery(credentials: { email: string; password: string }): Observable<any> {
-		return this.http.post(`${this.apiUrl}/login`, credentials); // 👈 Cierra la conexión si el servicio se destruye
+	register(credentials: {
+		usernam: string;
+		email: string;
+		password: string;
+		confirmpassword: string;
+		}): Observable<any> {
+		return this.http.post(`${this.apiUrl}/register`, credentials); // 👈 Cierra la conexión si el servicio se destruye
+	}
+
+	// Iniciar sesión
+	recovery(credentials: { email: string; }): Observable<any> {
+		return this.http.post(`${this.apiUrl}/recovery`, credentials); // 👈 Cierra la conexión si el servicio se destruye
 	}
 
 
