@@ -11,7 +11,7 @@ import { SpinnerService } from '../theme/shared/components/spinner/spinner.servi
 	providedIn: 'root' // ✅ Esto asegura que Angular inyecte el servicio globalmente
 })
 
-export class EmpresasService implements OnDestroy {
+export class CommunitiesService implements OnDestroy {
 
 	private authService = inject(AuthService);
 	private apiUrl = environment.apiUrl; // Usa la URL de la API desde environment.ts
@@ -23,12 +23,12 @@ export class EmpresasService implements OnDestroy {
 
 	}
 
-	obtenerEmpresas(): Observable<any> {
+	get(): Observable<any> {
 		const headers = new HttpHeaders({
 			Authorization: `Bearer ${this.authService.getToken()}`
 		});
 		//this.spinnerService.ocultarSpinner();
-		return this.http.get(`${this.apiUrl}/enterprises`, { headers }).pipe();
+		return this.http.get(`${this.apiUrl}/communities`, { headers }).pipe();
 	}
 
 	ngOnDestroy(): void {
