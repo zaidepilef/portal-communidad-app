@@ -28,7 +28,7 @@ export class AuthService implements OnDestroy {
 		email: string;
 		password: string;
 		confirmpassword: string;
-		}): Observable<any> {
+	}): Observable<any> {
 		return this.http.post(`${this.apiUrl}/register`, credentials); // 👈 Cierra la conexión si el servicio se destruye
 	}
 
@@ -41,9 +41,6 @@ export class AuthService implements OnDestroy {
 	// Guardar el token y la expiración en LocalStorage
 	saveToken(response: any): void {
 		localStorage.setItem('access_token', response.token);
-		// Guardar la fecha de expiración en milisegundos
-		const expirationTime = new Date().getTime() + response.expires_in * 1000;
-		localStorage.setItem('token_expires_at', expirationTime.toString());
 	}
 
 	// Obtener el token
@@ -51,8 +48,14 @@ export class AuthService implements OnDestroy {
 		return localStorage.getItem('access_token');
 	}
 
-	// Verificar si el usuario está autenticado
+
 	isAuthenticated(): boolean {
+		return !!localStorage.getItem('access_token');
+	}
+
+
+	// Verificar si el usuario está autenticado
+	_isAuthenticated(): boolean {
 
 		const token = this.getToken();
 		const expiration = localStorage.getItem('token_expires_at');

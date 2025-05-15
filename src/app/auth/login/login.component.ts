@@ -42,6 +42,7 @@ export class LoginComponent implements OnDestroy {
 				this.isLoading = false; // ✅ Ocultar GIF al recibir respuesta
 				this.authService.saveToken(response);
 				this.router.navigate(['/dashboard']); // Redirigir al Dashboard
+				alert('Bienvenido'); // ✅ Mensaje de bienvenida
 			},
 			error: (err) => {
 				this.errorMessage = 'Correo o contraseña incorrectos';
