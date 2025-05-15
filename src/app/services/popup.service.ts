@@ -14,6 +14,5 @@ export class PopupService {
 
 	mostrarPopup(mensaje: string) {
 		this.popupMessageSubject.next(mensaje);
-
 	}
 }
