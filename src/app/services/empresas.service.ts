@@ -38,6 +38,11 @@ export class EnterprisesService implements OnDestroy {
 		return this.http.put<Enterprise>(`${this.apiUrl}/enterprises/${id}`, data, { headers: this.getAuthHeaders() });
 	}
 
+	create(data: Partial<Enterprise>) {
+		return this.http.post<Enterprise>(`${this.apiUrl}/enterprises`, data, { headers: this.getAuthHeaders() });
+	}
+
+
 	ngOnDestroy(): void {
 		this.destroy$.next();
 		this.destroy$.complete();

@@ -11,6 +11,7 @@ import { UnidadesComponent } from './unidades/unidades.component';
 import { SamplePageComponent } from './sample-page/sample-page.component';
 import { CondominiosComponent } from './condominios/condominios.component';
 import { CondominioDetailsComponent } from './condominios/condominio-details/condominio-details.component ';
+import { EmpresaDetalleComponent } from './empresas/empresa-details/empresa-details.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
 	{ path: 'condominio-details/:id', component: CondominioDetailsComponent },
 
 	{ path: 'empresas', component: EmpresasComponent },
+	{ path: 'empresas/:id', component: EmpresaDetalleComponent },
 
 	{ path: 'gastos', component: GastosComponent },
 	{ path: 'home', component: HomeComponent },
