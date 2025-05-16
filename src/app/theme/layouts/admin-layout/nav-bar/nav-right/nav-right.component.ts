@@ -27,6 +27,7 @@ import {
 } from '@ant-design/icons-angular/icons';
 import { NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-nav-right',
@@ -42,6 +43,7 @@ export class NavRightComponent {
   windowWidth: number;
   screenFull: boolean = true;
 
+  private authService = inject(AuthService);
   constructor() {
     this.windowWidth = window.innerWidth;
     this.iconService.addIcon(
@@ -108,4 +110,8 @@ export class NavRightComponent {
       title: 'Historial'
     }
   ];
+
+  logout() {
+    this.authService.logout();
+  }
 }

@@ -1,0 +1,26 @@
+<div class="col-md-12">
+	<h5 class="mb-3">Empresas</h5>
+	<div class="card">
+		<div class="list-group list-group-flush">
+			@for (item of empresas; track trackById) {
+			<a href="javascript:" class="list-group-item list-group-item-action px-3">
+				<div class="d-flex">
+
+					<div class="flex-grow-1 ms-3">
+						<h6 class="mb-1">{{ item.rut }}</h6>
+						<p class="mb-0 text-muted">{{ item.razon_social }}</p>
+					</div>
+					<div class="flex-shrink-0 text-end">
+						<h6 class="mb-1">{{ item.representante_legal }}</h6>
+						<p class="mb-0 text-muted">{{ item.domicilio }}</p>
+						<button class="btn btn-sm btn-primary" (click)="verDetalles(item.id)">Ver</button>
+					</div>
+				</div>
+			</a>
+			}
+		</div>
+	</div>
+
+</div>
+
+

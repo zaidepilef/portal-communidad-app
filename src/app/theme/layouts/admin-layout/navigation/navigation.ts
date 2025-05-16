@@ -20,8 +20,8 @@ export interface NavigationItem {
 
 export const NavigationItems: NavigationItem[] = [
   {
-    id: 'dashboard',
-    title: 'Dashboard',
+    id: 'administrar',
+    title: 'Administrar',
     type: 'group',
     icon: 'icon-navigation',
     children: [
@@ -32,7 +32,7 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         url: '/dashboard/default',
         icon: 'dashboard',
-        breadcrumbs: false
+        breadcrumbs: true
       },
       {
         id: 'empresas',
@@ -41,7 +41,7 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         url: '/dashboard/empresas',
         icon: 'dashboard',
-        breadcrumbs: false
+        breadcrumbs: true
       },
       {
         id: 'condominios',
@@ -50,7 +50,7 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         url: '/dashboard/condominios',
         icon: 'dashboard',
-        breadcrumbs: false
+        breadcrumbs: true
       },
       {
         id: 'unidades',
@@ -59,44 +59,28 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         url: '/dashboard/unidades',
         icon: 'dashboard',
-        breadcrumbs: false
+        breadcrumbs: true
       }
     ]
   },
   {
     id: 'utilities',
-    title: 'UI Components',
+    title: 'Utilities',
     type: 'group',
     icon: 'icon-navigation',
     children: [
       {
-        id: 'usuarios',
-        title: 'Usuarios',
+        id: 'settings',
+        title: 'Settings',
         type: 'item',
         classes: 'nav-item',
-        url: '/typography',
+        url: '/dashboard/settings',
         icon: 'font-size'
-      },
-      {
-        id: 'roles',
-        title: 'Roles',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/color',
-        icon: 'bg-colors'
-      },
-      {
-        id: 'tabler',
-        title: 'Tabler',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'https://ant.design/components/icon',
-        icon: 'ant-design',
-        target: true,
-        external: true
       }
+
     ]
   },
+
   {
     id: 'accesos',
     title: 'Accesos',
@@ -108,64 +92,20 @@ export const NavigationItems: NavigationItem[] = [
         title: 'Usuarios',
         type: 'item',
         classes: 'nav-item',
-        url: '/login',
+        url: '/dashboard/usuarios',
         icon: 'login',
-        target: true,
-        breadcrumbs: false
+        target: false,
+        breadcrumbs: true
       },
       {
         id: 'perfiles',
         title: 'Perfiles',
         type: 'item',
         classes: 'nav-item',
-        url: '/login',
+        url: '/dashboard/roles',
         icon: 'login',
-        target: true,
-        breadcrumbs: false
-      },
-      {
-        id: 'perfiles',
-        title: 'Perfiles',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/register',
-        icon: 'profile',
-        target: true,
-        breadcrumbs: false
-      }
-    ]
-  },
-  {
-    id: 'utilities',
-    title: 'UI Components',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'typography',
-        title: 'Typography',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/typography',
-        icon: 'font-size'
-      },
-      {
-        id: 'color',
-        title: 'Colors',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/color',
-        icon: 'bg-colors'
-      },
-      {
-        id: 'tabler',
-        title: 'Tabler',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'https://ant.design/components/icon',
-        icon: 'ant-design',
-        target: true,
-        external: true
+        target: false,
+        breadcrumbs: true
       }
     ]
   },
@@ -177,23 +117,52 @@ export const NavigationItems: NavigationItem[] = [
     icon: 'icon-navigation',
     children: [
       {
-        id: 'sample-page',
-        title: 'Sample Page',
+        id: 'periodos',
+        title: 'Periodos',
         type: 'item',
-        url: '/sample-page',
+        url: 'dashboard/periodos',
         classes: 'nav-item',
         icon: 'chrome'
       },
       {
-        id: 'document',
-        title: 'Document',
+        id: 'gastos',
+        title: 'Gastos',
         type: 'item',
         classes: 'nav-item',
-        url: 'https://codedthemes.gitbook.io/mantis-angular/',
-        icon: 'question',
-        target: true,
-        external: true
+        url: 'dashboard/gastos',
+        icon: 'question'
+      }
+    ]
+  },
+
+  {
+    id: 'ejemplo',
+    title: 'Ejemplo',
+    hidden: false,
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'hijouno',
+        title: 'hijouno',
+        type: 'item',
+        url: 'dashboard/hijouno',
+        classes: 'nav-item',
+        icon: 'chrome'
+      },
+      {
+        id: 'hijodos',
+        title: 'hijodos',
+        type: 'item',
+        classes: 'nav-item',
+        url: 'dashboard/hijodos',
+        icon: 'question'
       }
     ]
   }
+
+
+
+
+
 ];

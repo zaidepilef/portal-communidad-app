@@ -47,7 +47,7 @@ export class BreadcrumbComponent {
   // constructor
   constructor() {
     this.navigations = NavigationItems;
-    this.type = 'theme1';
+    this.type = 'theme2';
     this.setBreadcrumb();
     this.iconService.addIcon(...[GlobalOutline, NodeExpandOutline]);
   }
@@ -60,7 +60,7 @@ export class BreadcrumbComponent {
         const breadcrumbList = this.filterNavigation(this.navigations, activeLink);
         this.navigationList = breadcrumbList;
         const title = breadcrumbList[breadcrumbList.length - 1]?.title || 'Welcome';
-        this.titleService.setTitle(title + ' | Mantis  Angular Admin Template');
+        this.titleService.setTitle(title + ' | Habitech');
       }
     });
   }

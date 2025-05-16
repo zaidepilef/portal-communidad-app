@@ -12,7 +12,13 @@ import { BreadcrumbComponent } from 'src/app/theme/shared/components/breadcrumb/
 
 @Component({
   selector: 'app-admin',
-  imports: [CommonModule, BreadcrumbComponent, NavigationComponent, NavBarComponent, RouterModule, ConfigurationComponent],
+  imports: [
+    CommonModule,
+    BreadcrumbComponent,
+    NavigationComponent,
+    NavBarComponent,
+    RouterModule,
+    ConfigurationComponent],
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.scss']
 })

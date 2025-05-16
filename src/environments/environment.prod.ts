@@ -1,7 +1,9 @@
 import packageInfo from '../../package.json';
 
 export const environment = {
-  apiUrl: 'https://api.tudominio.com/api',
-  appVersion: packageInfo.version,
-  production: true
+
+	//apiUrl: 'http://localhost:8080/api',
+	apiUrl: 'http://ougt.cl/project-root/public/api',
+	appVersion: packageInfo.version,
+	production: false
 };
