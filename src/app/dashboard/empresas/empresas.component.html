@@ -2,7 +2,7 @@
 	<h5 class="mb-3">Empresas</h5>
 	<div class="card">
 		<div class="list-group list-group-flush">
-			@for (item of empresas; track trackById) {
+			@for (item of empresas; track item.id) {
 			<a href="javascript:" class="list-group-item list-group-item-action px-3">
 				<div class="d-flex">
 
@@ -13,7 +13,8 @@
 					<div class="flex-shrink-0 text-end">
 						<h6 class="mb-1">{{ item.representante_legal }}</h6>
 						<p class="mb-0 text-muted">{{ item.domicilio }}</p>
-						<button class="btn btn-sm btn-primary" (click)="verDetalles(item.id)">Ver</button>
+						<button class="btn btn-sm btn-outline-info" (click)="detailsEnterprise(item.id)">Ver</button>
+
 					</div>
 				</div>
 			</a>
