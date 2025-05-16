@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, inject, OnInit } from '@angular/core';
-import { EmpresasService } from 'src/app/services/empresas.service';
+import { Enterprise } from 'src/app/models/enterprise-model';
+import { EnterprisesService } from 'src/app/services/empresas.service';
 
 @Component({
 	selector: 'app-empresas',
@@ -11,17 +12,16 @@ import { EmpresasService } from 'src/app/services/empresas.service';
 
 export class EmpresasComponent implements OnInit {
 
-	private empresasService = inject(EmpresasService);
-	empresas: any[] = [];
+	private enterpriseService = inject(EnterprisesService);
+	empresas: Enterprise[] = [];
 
 	ngOnInit() {
-		this.obtenerEmpresas();
+		this.getEnterprises();
 	}
 
-	obtenerEmpresas() {
-		this.empresasService.obtenerEmpresas().subscribe({
+	getEnterprises() {
+		this.enterpriseService.get().subscribe({
 			next: (data) => (
-				console.log('data : ',data),
 				this.empresas = data
 			),
 			error: (err) => console.error('Error al obtener empresas:', err),

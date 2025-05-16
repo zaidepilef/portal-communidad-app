@@ -1,41 +1,46 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {  Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { AuthService } from './auth.service';
 import { SpinnerService } from '../theme/shared/components/spinner/spinner.service';
+import { Enterprise } from '../models/enterprise-model';
 
 @Injectable({
-	providedIn: 'root' // ✅ Esto asegura que Angular inyecte el servicio globalmente
+	providedIn: 'root'
 })
-
-export class EmpresasService implements OnDestroy {
+export class EnterprisesService implements OnDestroy {
 
 	private authService = inject(AuthService);
-	private apiUrl = environment.apiUrl; // Usa la URL de la API desde environment.ts
-	private destroy$ = new Subject<void>(); // 👈 Se usará para cerrar conexiones
 	private spinnerService = inject(SpinnerService);
+	private apiUrl = environment.apiUrl;
+	private destroy$ = new Subject<void>();
 
-	constructor(private http: HttpClient) {
-		//this.spinnerService.mostrarSpinner(); // ✅ Muestra el spinner antes de la petición
+	constructor(private http: HttpClient) { }
 
-	}
-
-	obtenerEmpresas(): Observable<any> {
-		const headers = new HttpHeaders({
+	private getAuthHeaders(): HttpHeaders {
+		return new HttpHeaders({
 			Authorization: `Bearer ${this.authService.getToken()}`
 		});
-		//this.spinnerService.ocultarSpinner();
-		return this.http.get(`${this.apiUrl}/enterprises`, { headers }).pipe();
+	}
+
+	get(): Observable<Enterprise[]> {
+		return this.http.get<Enterprise[]>(`${this.apiUrl}/enterprises`, { headers: this.getAuthHeaders() });
+	}
+
+	getById(id: number): Observable<Enterprise> {
+		return this.http.get<Enterprise>(`${this.apiUrl}/enterprises/${id}`, { headers: this.getAuthHeaders() });
+	}
+
+	update(id: number, data: Partial<Enterprise>): Observable<Enterprise> {
+		return this.http.put<Enterprise>(`${this.apiUrl}/enterprises/${id}`, data, { headers: this.getAuthHeaders() });
 	}
 
 	ngOnDestroy(): void {
-
-		this.destroy$.next(); // 👈 Notifica a las suscripciones que se deben cancelar
+		this.destroy$.next();
 		this.destroy$.complete();
-
 	}
-
 }
+
