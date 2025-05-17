@@ -12,6 +12,7 @@ import { SamplePageComponent } from './sample-page/sample-page.component';
 import { CondominiosComponent } from './condominios/condominios.component';
 import { CondominioDetailsComponent } from './condominios/condominio-details/condominio-details.component ';
 import { EmpresaDetalleComponent } from './empresas/empresa-details/empresa-details.component';
+import { UsuarioDetailsComponent } from './usuarios/usuario-details/usuario-details.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
 	{ path: 'sample-page', component: SamplePageComponent },
 	{ path: 'unidades', component: UnidadesComponent },
 	{ path: 'usuarios', component: UsuariosComponent },
+	{ path: 'usuario-details/:id', component: UsuarioDetailsComponent },
 ];
 
 @NgModule({

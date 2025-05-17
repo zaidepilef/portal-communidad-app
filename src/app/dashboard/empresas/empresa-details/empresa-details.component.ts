@@ -67,6 +67,11 @@ export class EmpresaDetalleComponent implements OnInit {
 		*/
 	}
 
+	onCheckboxChange(event: Event) {
+		const checked = (event.target as HTMLInputElement).checked;
+		this.enterpriseForm.get('estado')?.setValue(checked ? 'ACTIVO' : 'BLOQUEADO');
+	}
+
 	ngOnInit(): void {
 
 		this.empresaId = +this.route.snapshot.paramMap.get('id')!;
@@ -80,7 +85,8 @@ export class EmpresaDetalleComponent implements OnInit {
 			phone: [''],
 			contact_email: [''],
 			representante_legal: [''],
-			tipo_empresa: ['']
+			tipo_empresa: [''],
+			estado: ['BLOQUEADO'] // o 'Inactiva' por defecto
 		});
 	}
 }

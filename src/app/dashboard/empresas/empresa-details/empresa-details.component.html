@@ -32,6 +32,30 @@
 					<input formControlName="representante_legal" class="form-control" />
 				</div>
 			</div>
+			<div class="mb-3">
+				<label>Tipo de Empresa</label>
+
+				<select class="form-select" formControlName="estado">
+					<option value="Activa">Activa</option>
+					<option value="Inactiva">Inactiva</option>
+				</select>
+			</div>
+			<div class="mb-3">
+				<label>Estado</label>
+				<select class="form-select" formControlName="estado">
+					<option value="Activa">Activa</option>
+					<option value="Inactiva">Inactiva</option>
+				</select>
+			</div>
+
+			<div class="form-check form-switch mb-3">
+				<input class="form-check-input" type="checkbox" id="switchEstado"
+					[checked]="enterpriseForm.get('estado')?.value === 'ACTIVO'"
+					(change)="onCheckboxChange($event)" />
+				<label class="form-check-label" for="switchEstado">
+					Estado: {{ enterpriseForm.get('estado')?.value }}
+				</label>
+			</div>
 
 			<!-- Más campos aquí... -->
 

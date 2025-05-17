@@ -1,33 +1,29 @@
 <div class="col-md-12 col-xl-12">
-	<h5 class="mb-3">Listado de Empresas</h5>
 	<div class="card tbl-card">
 		<div class="table-responsive">
 			<table class="table table-hover mb-0">
 				<thead>
 					<tr>
-						<th>ID</th>
-						<th>Usuario</th>
-						<th>Correo</th>
-						<th class="text-end">Acciones</th>
+						<th>user_id</th>
+						<th>username</th>
+						<th>email</th>
+						<th>status</th>
+						<th class="text-end"></th>
 					</tr>
 				</thead>
 				<tbody>
-					@for (user of users; track trackById) {
+				@for (user of users; track user.id) {
 					<tr>
 
-						<td>
-							<a href="javascript:" class="text-muted">{{ user.id }}</a>
-						</td>
+						<td>{{ user.id }}</td>
 						<td>{{ user.username }}</td>
 						<td>{{ user.email }}</td>
-
-
+						<td>{{ user.status }}</td>
 						<td class="text-end">
-							<button class="btn btn-sm btn-primary">Ver</button>
+							<button class="btn btn-sm btn-outline-info btn-primary" (click)="itemDetails(user.id)">Ver</button>
 						</td>
 					</tr>
-
-					}
+				}
 				</tbody>
 			</table>
 		</div>

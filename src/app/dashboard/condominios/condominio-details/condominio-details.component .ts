@@ -38,16 +38,9 @@ export class CondominioDetailsComponent implements OnInit {
 	}
 
 	getCondominioDetails(id: number) {
-
 		this.communityService.getById(id).subscribe((data: Community) => {
-			this.form.patchValue({
-				name: data.name,
-				address: data.address,
-				enterprise_id: data.enterprise_id
-			});
+			this.form.patchValue(data);
 		});
-
-
 	}
 
 	loadEnterprises() {

@@ -2,7 +2,9 @@
 // angular import
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/services/users.service';
+import { User } from 'src/app/models/user-model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,35 +16,33 @@ import { UserService } from 'src/app/services/users.service';
 export class UsuariosComponent implements OnInit {
 
 
-	users: any[] = [];
+	users: User[] = [];
+
 
 	// constructor
-	constructor(private userService :UserService) {
-
-	}
+	constructor(private router: Router, private userService :UsersService) {}
 
 
 	ngOnInit() {
-		this.obtenerUsuarios();
+		this.getUsers();
 	}
 
-	obtenerUsuarios() {
-		this.userService.getUsers().subscribe({
+
+	getUsers() {
+		this.userService.get().subscribe({
 			next: (data) => (
-				console.log('data : ', data),
 				this.users = data
 			),
-			error: (err) => console.error('Error al obtener empresas:', err),
+			error: (err) => console.error('Error al obtener usuarios:', err),
 		});
 	}
 
 
-	verDetalles(id: number) {
-		console.log('Ver detalles de la empresa:', id);
+	itemDetails(id: number) {
 		// Aquí podrías redirigir a una página de detalles
+		this.router.navigate(['/dashboard/usuario-details', id]);
 	}
 
-	trackById(index: number, item: any): number {
-		return item.id;
-	}
+
+
 }

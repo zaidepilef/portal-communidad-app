@@ -6,13 +6,13 @@ import { environment } from '../../environments/environment';
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { AuthService } from './auth.service';
 import { SpinnerService } from '../theme/shared/components/spinner/spinner.service';
-import { User } from '../models/user-model';
+import { Role } from '../models/roles-model';
 
 @Injectable({
 	providedIn: 'root' // ✅ Esto asegura que Angular inyecte el servicio globalmente
 })
 
-export class UsersService implements OnDestroy {
+export class RolesService implements OnDestroy {
 
 	private authService = inject(AuthService);
 	private apiUrl = environment.apiUrl; // Usa la URL de la API desde environment.ts
@@ -26,8 +26,8 @@ export class UsersService implements OnDestroy {
 	private getAuthHeaders(): HttpHeaders { return new HttpHeaders({ Authorization: `Bearer ${this.authService.getToken()}` }); }
 
 
-	get(): Observable<User[]> {
-		return this.http.get<User[]>(`${this.apiUrl}/users`, { headers: this.getAuthHeaders() });
+	get(): Observable<Role[]> {
+		return this.http.get<Role[]>(`${this.apiUrl}/roles`, { headers: this.getAuthHeaders() });
 	}
 
 	/**
@@ -36,8 +36,8 @@ export class UsersService implements OnDestroy {
 	 * @param data
 	 * @returns
 	 */
-	update(id: number, data: any): Observable<any> {
-		return this.http.put(`${this.apiUrl}/users/${id}`, data, { headers: this.getAuthHeaders() });
+	update(id: number, data: Role): Observable<Role> {
+		return this.http.put<Role>(`${this.apiUrl}/roles/${id}`, data, { headers: this.getAuthHeaders() });
 	}
 
 	/**
@@ -45,8 +45,8 @@ export class UsersService implements OnDestroy {
 	 * @param id
 	 * @returns
 	 */
-	getById(id: number): Observable<User> {
-		return this.http.get<User>(`${this.apiUrl}/users/${id}`, { headers: this.getAuthHeaders() });
+	getById(id: number): Observable<Role> {
+		return this.http.get<Role>(`${this.apiUrl}/roles/${id}`, { headers: this.getAuthHeaders() });
 	}
 
 	/**
@@ -54,8 +54,8 @@ export class UsersService implements OnDestroy {
 	 * @param data
 	 * @returns
 	 */
-	create(data: Partial<User>) {
-		return this.http.post<User>(`${this.apiUrl}/users`, data, { headers: this.getAuthHeaders() });
+	create(data: Partial<Role>) {
+		return this.http.post<Role>(`${this.apiUrl}/users`, data, { headers: this.getAuthHeaders() });
 	}
 
 	ngOnDestroy(): void {
