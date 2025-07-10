@@ -106,6 +106,16 @@ export const NavigationItems: NavigationItem[] = [
         icon: 'login',
         target: false,
         breadcrumbs: true
+      },
+      {
+        id: 'autorizar-link',
+        title: 'Enlaces de Autorización',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/dashboard/autorizar-link',
+        icon: 'link',
+        target: false,
+        breadcrumbs: true
       }
     ]
   },

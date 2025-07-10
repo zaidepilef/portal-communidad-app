@@ -17,24 +17,38 @@ export class AuthService implements OnDestroy {
 
 	// Iniciar sesión
 	login(credentials: { email: string; password: string }): Observable<any> {
-		return this.http.post(`${this.apiUrl}/login`, credentials); // 👈 Cierra la conexión si el servicio se destruye
+		return this.http.post(`${this.apiUrl}/login`, credentials);
 	}
 
-
-
-	// Iniciar sesión
+	// Registrar usuario
 	register(credentials: {
-		usernam: string;
+		username: string;
 		email: string;
 		password: string;
 		confirmpassword: string;
 	}): Observable<any> {
-		return this.http.post(`${this.apiUrl}/register`, credentials); // 👈 Cierra la conexión si el servicio se destruye
+		return this.http.post(`${this.apiUrl}/register`, credentials);
 	}
 
-	// Iniciar sesión
+	// Recuperar contraseña
 	recovery(credentials: { email: string; }): Observable<any> {
-		return this.http.post(`${this.apiUrl}/recovery`, credentials); // 👈 Cierra la conexión si el servicio se destruye
+		return this.http.post(`${this.apiUrl}/recovery`, credentials);
+	}
+
+	// Validar token de activación
+	validateActivationToken(token: string): Observable<any> {
+		return this.http.post(`${this.apiUrl}/activation/validate`, { token });
+	}
+
+	// Activar cuenta
+	activateAccount(userData: {
+		nombre: string;
+		apellido: string;
+		tipoDocumento: string;
+		cedula: string;
+		token_person: string;
+	}): Observable<any> {
+		return this.http.post(`${this.apiUrl}/activation/activate`, userData);
 	}
 
 

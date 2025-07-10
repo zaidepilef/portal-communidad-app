@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+
 @Component({
 	selector: 'app-register',
 	imports: [FormsModule, ReactiveFormsModule, CommonModule, RouterModule],
@@ -31,6 +32,7 @@ export class RegisterComponent {
 	private subscription: Subscription | null = null;
 	registerForm: FormGroup;
 	errorMessage: string | null = null;
+	successMessage: string | null = null;
 	isLoading = false; // ✅ Variable para controlar el GIF de carga
 
 	constructor(private fb: FormBuilder) {
@@ -45,45 +47,43 @@ export class RegisterComponent {
 	}
 
 	onSubmit() {
-
 		if (this.registerForm.invalid) return;
 
+		// Validar que las contraseñas coincidan
+		if (this.registerForm.get('password')?.value !== this.registerForm.get('confirmpassword')?.value) {
+			this.errorMessage = 'Las contraseñas no coinciden';
+			this.successMessage = null;
+			return;
+		}
+
 		this.isLoading = true;
+		this.errorMessage = null;
+		this.successMessage = null;
 
 		const credentials = this.registerForm.value;
 
 		this.authService.register(credentials).subscribe({
-
 			next: (response) => {
-
 				this.isLoading = false;
-				//this.authService.saveToken(response);
-				console.log(response)
 
+				if (response.success) {
+					// Registro exitoso
+					this.successMessage = 'Registro exitoso. Por favor, revise su email para activar su cuenta.';
+					// Limpiar formulario
+					this.registerForm.reset();
+				} else {
+					this.errorMessage = response.message || 'Error en el registro';
+					this.successMessage = null;
+				}
 			},
 			error: (err) => {
-
-				console.error(err)
-				this.errorMessage = "Error en la solicitud";
+				console.error('Error en registro:', err);
+				this.errorMessage = err.error?.message || 'Error en la solicitud';
+				this.successMessage = null;
 				this.isLoading = false;
-
 			}
 		});
 	}
 
-
-	lonSubmit(): void {
-
-		if (this.registerForm.valid) {
-
-			this.isLoading = false;
-			console.log('Formulario enviado:', this.registerForm.value);
-
-		} else {
-
-			console.log('Formulario inválido');
-
-		}
-
-	}
+	// llamada a service aqui
 }

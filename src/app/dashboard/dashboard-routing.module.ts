@@ -13,6 +13,7 @@ import { CondominiosComponent } from './condominios/condominios.component';
 import { CondominioDetailsComponent } from './condominios/condominio-details/condominio-details.component ';
 import { EmpresaDetalleComponent } from './empresas/empresa-details/empresa-details.component';
 import { UsuarioDetailsComponent } from './usuarios/usuario-details/usuario-details.component';
+import { AutorizarLinkComponent } from './autorizar-link/autorizar-link.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
 	{ path: 'unidades', component: UnidadesComponent },
 	{ path: 'usuarios', component: UsuariosComponent },
 	{ path: 'usuario-details/:id', component: UsuarioDetailsComponent },
+	{ path: 'autorizar-link', component: AutorizarLinkComponent },
 ];
 
 @NgModule({
