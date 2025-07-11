@@ -30,13 +30,42 @@ export class ActivacionComponent implements OnInit {
     private authService: AuthService,
     private fb: FormBuilder
   ) {
-    // Inicializar formulario
+    // Inicializar formulario con validaciones
     this.userDataForm = this.fb.group({
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
-      tipoDocumento: ['', Validators.required],
-      cedula: ['', Validators.required]
+      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      apellido: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      tipoDocumento: ['COD_DOC', [Validators.required]], // Por defecto COD_DOC
+      cedula: ['', [Validators.required, Validators.pattern(/^\d{8,10}$/)]], // 8-10 dígitos
+      fechaNacimiento: ['', [Validators.required, this.fechaNacimientoValidator()]]
     });
+  }
+
+  // Validador personalizado para fecha de nacimiento
+  fechaNacimientoValidator() {
+    return (control: { value: string }) => {
+      if (!control.value) {
+        return null;
+      }
+
+      const fecha = new Date(control.value);
+      const hoy = new Date();
+      let edad = hoy.getFullYear() - fecha.getFullYear();
+      const mes = hoy.getMonth() - fecha.getMonth();
+
+      if (mes < 0 || (mes === 0 && hoy.getDate() < fecha.getDate())) {
+        edad--;
+      }
+
+      if (edad < 18) {
+        return { menorEdad: true };
+      }
+
+      if (edad > 120) {
+        return { fechaInvalida: true };
+      }
+
+      return null;
+    };
   }
 
   ngOnInit() {
@@ -56,8 +85,24 @@ export class ActivacionComponent implements OnInit {
       `${this.token.substring(0, 10)}...` :
       this.token;
 
-    // Validar el token
-    this.validarToken();
+    // Verificar si hay datos en localStorage (viene del componente autorizar)
+    const tokenPerson = localStorage.getItem('token_person');
+    const userInfo = localStorage.getItem('userInfo');
+
+    if (tokenPerson && userInfo) {
+      this.tokenPerson = tokenPerson;
+      this.userInfo = JSON.parse(userInfo);
+      this.showForm = true;
+      this.isLoading = false;
+      this.mensaje = 'Complete sus datos para activar la cuenta.';
+
+      // Limpiar localStorage
+      localStorage.removeItem('token_person');
+      localStorage.removeItem('userInfo');
+    } else {
+      // Validar el token
+      this.validarToken();
+    }
   }
 
   validarToken() {
@@ -116,6 +161,7 @@ export class ActivacionComponent implements OnInit {
       apellido: this.userDataForm.value.apellido,
       tipoDocumento: this.userDataForm.value.tipoDocumento,
       cedula: this.userDataForm.value.cedula,
+      fechaNacimiento: this.userDataForm.value.fechaNacimiento,
       token_person: this.tokenPerson // Token específico para activación
     };
 

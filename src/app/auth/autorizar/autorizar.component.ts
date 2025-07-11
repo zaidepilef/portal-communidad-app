@@ -99,8 +99,7 @@ export class AutorizarComponent implements OnInit {
 		setTimeout(() => {
 			this.isLoading = false;
 			this.router.navigate(['/auth/activacion']);
-		}, 12000);
-
+		}, 8000);
 	}
 
 

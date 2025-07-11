@@ -45,30 +45,32 @@
           </div>
 
           <!-- Formulario de datos del usuario -->
-          <div *ngIf="showForm && !isLoading && !error && !success" class="mt-4">
             <form [formGroup]="userDataForm" (ngSubmit)="onSubmitForm()">
               <div class="row">
                 <div class="col-md-6 mb-3">
-                  <label class="form-label">Nombre</label>
+                  <label class="form-label">Nombre *</label>
                   <input type="text" class="form-control" formControlName="nombre" placeholder="Su nombre">
                   <div *ngIf="userDataForm.get('nombre')?.invalid && userDataForm.get('nombre')?.touched" class="text-danger small mt-1">
-                    El nombre es obligatorio
+                    <span *ngIf="userDataForm.get('nombre')?.errors?.['required']">El nombre es obligatorio</span>
+                    <span *ngIf="userDataForm.get('nombre')?.errors?.['minlength']">El nombre debe tener al menos 2 caracteres</span>
+                    <span *ngIf="userDataForm.get('nombre')?.errors?.['maxlength']">El nombre no puede exceder 50 caracteres</span>
                   </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label class="form-label">Apellido</label>
+                  <label class="form-label">Apellido *</label>
                   <input type="text" class="form-control" formControlName="apellido" placeholder="Su apellido">
                   <div *ngIf="userDataForm.get('apellido')?.invalid && userDataForm.get('apellido')?.touched" class="text-danger small mt-1">
-                    El apellido es obligatorio
+                    <span *ngIf="userDataForm.get('apellido')?.errors?.['required']">El apellido es obligatorio</span>
+                    <span *ngIf="userDataForm.get('apellido')?.errors?.['minlength']">El apellido debe tener al menos 2 caracteres</span>
+                    <span *ngIf="userDataForm.get('apellido')?.errors?.['maxlength']">El apellido no puede exceder 50 caracteres</span>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 mb-3">
-                  <label class="form-label">Tipo de Documento</label>
+                  <label class="form-label">Tipo de Documento *</label>
                   <select class="form-control" formControlName="tipoDocumento">
-                    <option value="">Seleccione...</option>
-                    <option value="CC">Cédula de Ciudadanía</option>
+                    <option value="COD_DOC">Cédula de Ciudadanía</option>
                     <option value="CE">Cédula de Extranjería</option>
                     <option value="TI">Tarjeta de Identidad</option>
                     <option value="PP">Pasaporte</option>
@@ -78,10 +80,22 @@
                   </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label class="form-label">Número de Documento</label>
-                  <input type="text" class="form-control" formControlName="cedula" placeholder="Número de documento">
+                  <label class="form-label">Número de Documento *</label>
+                  <input type="text" class="form-control" formControlName="cedula" placeholder="Número de documento (8-10 dígitos)">
                   <div *ngIf="userDataForm.get('cedula')?.invalid && userDataForm.get('cedula')?.touched" class="text-danger small mt-1">
-                    El número de documento es obligatorio
+                    <span *ngIf="userDataForm.get('cedula')?.errors?.['required']">El número de documento es obligatorio</span>
+                    <span *ngIf="userDataForm.get('cedula')?.errors?.['pattern']">El número debe tener entre 8 y 10 dígitos</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Fecha de Nacimiento *</label>
+                  <input type="date" class="form-control" formControlName="fechaNacimiento">
+                  <div *ngIf="userDataForm.get('fechaNacimiento')?.invalid && userDataForm.get('fechaNacimiento')?.touched" class="text-danger small mt-1">
+                    <span *ngIf="userDataForm.get('fechaNacimiento')?.errors?.['required']">La fecha de nacimiento es obligatoria</span>
+                    <span *ngIf="userDataForm.get('fechaNacimiento')?.errors?.['menorEdad']">Debe ser mayor de 18 años</span>
+                    <span *ngIf="userDataForm.get('fechaNacimiento')?.errors?.['fechaInvalida']">Fecha de nacimiento inválida</span>
                   </div>
                 </div>
               </div>
@@ -92,20 +106,9 @@
                 </button>
               </div>
             </form>
-          </div>
 
-          <!-- Botones de acción -->
-          <div class="mt-4">
-            <button *ngIf="error" class="btn btn-primary me-2" (click)="irAlLogin()">
-              Ir al Login
-            </button>
-            <button *ngIf="error" class="btn btn-secondary me-2" (click)="reintentar()">
-              Reintentar
-            </button>
-            <button *ngIf="success" class="btn btn-success" (click)="irAlLogin()">
-              Continuar al Login
-            </button>
-          </div>
+
+
 
           <!-- Información del token -->
           <div class="mt-4 text-muted">

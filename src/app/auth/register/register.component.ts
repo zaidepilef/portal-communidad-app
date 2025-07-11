@@ -3,8 +3,8 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { RegisterRequest, RegisterResponse } from 'src/app/models/register-model';
 
 @Component({
 	selector: 'app-register',
@@ -29,21 +29,44 @@ import { AuthService } from 'src/app/services/auth.service';
  */
 export class RegisterComponent {
 	private authService = inject(AuthService); // ✅ Inyección con `inject()`
-	private subscription: Subscription | null = null;
 	registerForm: FormGroup;
 	errorMessage: string | null = null;
 	successMessage: string | null = null;
 	isLoading = false; // ✅ Variable para controlar el GIF de carga
+	showPassword = false; // Controla visibilidad de password
+	showConfirmPassword = false; // Controla visibilidad de confirm password
+	registerRequest: RegisterRequest = {
+		username: '',
+		email: '',
+		password: '',
+		confirmpassword: ''
+	};
+	registerResponse: RegisterResponse | null = null;
 
 	constructor(private fb: FormBuilder) {
 
+
 		this.registerForm = this.fb.group({
-			username: ['', Validators.required],
+			username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
 			email: ['', [Validators.required, Validators.email]],
-			password: ['', [Validators.required]],
+			password: ['', [
+				Validators.required,
+				Validators.minLength(8),
+				Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
+			]],
 			confirmpassword: ['', [Validators.required]],
 		});
 
+	}
+
+	// Método para alternar visibilidad de password
+	togglePasswordVisibility() {
+		this.showPassword = !this.showPassword;
+	}
+
+	// Método para alternar visibilidad de confirm password
+	toggleConfirmPasswordVisibility() {
+		this.showConfirmPassword = !this.showConfirmPassword;
 	}
 
 	onSubmit() {
@@ -55,35 +78,32 @@ export class RegisterComponent {
 			this.successMessage = null;
 			return;
 		}
-
+		this.registerRequest = this.registerForm.value;
 		this.isLoading = true;
 		this.errorMessage = null;
 		this.successMessage = null;
 
-		const credentials = this.registerForm.value;
 
-		this.authService.register(credentials).subscribe({
-			next: (response) => {
-				this.isLoading = false;
-
-				if (response.success) {
-					// Registro exitoso
-					this.successMessage = 'Registro exitoso. Por favor, revise su email para activar su cuenta.';
-					// Limpiar formulario
-					this.registerForm.reset();
-				} else {
-					this.errorMessage = response.message || 'Error en el registro';
-					this.successMessage = null;
-				}
-			},
-			error: (err) => {
-				console.error('Error en registro:', err);
-				this.errorMessage = err.error?.message || 'Error en la solicitud';
-				this.successMessage = null;
-				this.isLoading = false;
-			}
-		});
+		this.callService();
 	}
 
 	// llamada a service aqui
+	callService() {
+
+
+		this.authService.register(this.registerRequest).subscribe({
+			next: (response) => {
+				this.registerResponse = response;
+				console.log('Respuesta del servicio:', response);
+				if (response.success) {
+					console.log('Registro exitoso:', response.message);
+				} else {
+					console.log('Error en registro:', response.message);
+				}
+			},
+			error: (err) => {
+				console.error('Error llamando al servicio:', err);
+			}
+		});
+	}
 }
