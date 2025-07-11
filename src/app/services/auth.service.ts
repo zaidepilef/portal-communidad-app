@@ -37,14 +37,7 @@ export class AuthService implements OnDestroy {
 	}
 
 	// Activar cuenta
-	activateAccount(userData: {
-		nombre: string;
-		apellido: string;
-		tipoDocumento: string;
-		cedula: string;
-		fechaNacimiento: string;
-		token_person: string;
-	}): Observable<any> {
+	activateAccount(userData: any): Observable<any> {
 		return this.http.post(`${this.apiUrl}/activation/activate`, userData);
 	}
 

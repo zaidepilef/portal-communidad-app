@@ -85,7 +85,7 @@
 
 
 						<div class="d-grid mt-4">
-							<button type="submit" [disabled]="userDataForm.invalid || isLoading" class="btn btn-primary">
+							<button type="submit" [disabled]="userDataForm.invalid" class="btn btn-primary">
 								<span *ngIf="!isLoading">Activar Cuenta</span>
 								<span *ngIf="isLoading">Activando cuenta...</span>
 							</button>

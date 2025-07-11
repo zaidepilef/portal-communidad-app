@@ -69,12 +69,11 @@ export class ActivacionComponent implements OnInit {
 		// Preparar datos para enviar al endpoint de activación
 		// El token_person es específico solo para este endpoint
 		const activationData = {
+			token_person: this.tokenPerson, // Token específico para activación
 			nombre: this.userDataForm.value.nombre,
 			apellido: this.userDataForm.value.apellido,
-			tipoDocumento: this.userDataForm.value.tipoDocumento,
-			cedula: this.userDataForm.value.cedula,
-			fechaNacimiento: this.userDataForm.value.fechaNacimiento,
-			token_person: this.tokenPerson // Token específico para activación
+			type_doc: 'RUN',
+			cod_doc: this.userDataForm.value.cedula,
 		};
 
 		// Llamar al endpoint de activación con los datos del usuario
