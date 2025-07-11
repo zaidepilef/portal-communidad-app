@@ -94,15 +94,22 @@ export class RegisterComponent {
 	callService() {
 
 		// Lógica para manejar la respuesta del registro y mostrar mensajes en español
+		// Si la respuesta contiene un mensaje de éxito y un enlace de activación, lo mostramos de forma clara al usuario.
+		// También podemos mostrar un mensaje especial si el email fue enviado correctamente.
+		// Este bloque se ejecuta antes de la suscripción al observable, por lo que aquí solo podrías preparar lógica previa si fuera necesario.
+		// En este punto, no hay respuesta aún, así que no se puede mostrar el mensaje aquí.
 		this.authService.register(this.registerRequest).subscribe({
+
 			next: (response) => {
-				this.isLoading = false;
-				this.registerResponse = response;
-				if (response && response.success) {
-					this.successMessage = response.message || '¡Cuenta creada correctamente! Por favor revisa tu correo para activar la cuenta.';
+				if (response) {
+					this.isLoading = false;
+					this.successMessage = response.message + ' Activa tu cuenta usando el enlace enviado a tu correo.';
 					this.errorMessage = null;
-					// Opcional: podrías redirigir al login o limpiar el formulario aquí
 					this.registerForm.reset();
+					// Si quieres mostrar el enlace de activación directamente (por ejemplo, en desarrollo), puedes descomentar la siguiente línea:
+					// this.successMessage += ` Enlace de activación: ${response.activation_link}`;
+					return;
+
 				} else {
 					this.errorMessage = response?.message || 'Ocurrió un error al crear la cuenta.';
 					this.successMessage = null;

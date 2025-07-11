@@ -11,78 +11,99 @@
 				<div class="card-body">
 
 					<div class="d-flex justify-content-between align-items-end mb-4">
-						<h3 class="mb-0"><b>Sign up</b></h3>
-						<a [routerLink]="['/auth/login']" class="link-primary">¿Ya tienes cuenta?, Inicia sesión</a>
+						<h3 class="mb-0"><b>Registrar</b></h3>
+						<a [routerLink]="['/auth/login']" class="link-primary">¿Ya tienes cuenta? Inicia sesión</a>
 					</div>
+					<p class="text-muted mb-3">
+						Por favor, ingresa un nombre de usuario, tu correo electrónico, crea una contraseña segura y repítela para confirmar. ¡Regístrate y comienza a disfrutar de una experiencia potente y segura!
+					</p>
 
-					<!-- Mensaje de error -->
-					<div *ngIf="errorMessage" class="alert alert-danger mb-3" role="alert">
-						{{ errorMessage }}
-					</div>
-
-					<!-- Mensaje de éxito -->
-					<div *ngIf="successMessage" class="alert alert-success mb-3" role="alert">
-						{{ successMessage }}
-					</div>
 
 					<form id="registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
 						<div class="form-group mb-3">
 							<label class="form-label" for="username">Usuario</label>
-							<input type="text" class="form-control" formControlName="username" id="username" placeholder="Usuario" />
-							<div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="text-danger small mt-1">
-								<span *ngIf="registerForm.get('username')?.errors?.['required']">El campo Usuario es obligatorio.</span>
-								<span *ngIf="registerForm.get('username')?.errors?.['minlength']">El usuario debe tener al menos 3 caracteres.</span>
-								<span *ngIf="registerForm.get('username')?.errors?.['maxlength']">El usuario no puede exceder 30 caracteres.</span>
+							<input type="text" class="form-control" formControlName="username" id="username"
+								placeholder="Usuario" />
+							<div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched"
+								class="text-danger small mt-1">
+								<span *ngIf="registerForm.get('username')?.errors?.['required']">El campo Usuario es
+									obligatorio.</span>
+								<span *ngIf="registerForm.get('username')?.errors?.['minlength']">El usuario debe tener
+									al menos 3 caracteres.</span>
+								<span *ngIf="registerForm.get('username')?.errors?.['maxlength']">El usuario no puede
+									exceder 30 caracteres.</span>
 							</div>
 						</div>
 
 						<div class="form-group mb-3">
 							<label class="form-label" for="email">Email</label>
-							<input type="email" class="form-control" formControlName="email" id="email" placeholder="Email" />
-							<div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="text-danger small mt-1">
-								<span *ngIf="registerForm.get('email')?.errors?.['required']">El campo Email es obligatorio.</span>
-								<span *ngIf="registerForm.get('email')?.errors?.['email']">Ingresa un email válido.</span>
+							<input type="email" class="form-control" formControlName="email" id="email"
+								placeholder="Email" />
+							<div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+								class="text-danger small mt-1">
+								<span *ngIf="registerForm.get('email')?.errors?.['required']">El campo Email es
+									obligatorio.</span>
+								<span *ngIf="registerForm.get('email')?.errors?.['email']">Ingresa un email
+									válido.</span>
 							</div>
 						</div>
 
 						<div class="form-group mb-3">
 							<label class="form-label" for="password">Password</label>
 							<div class="input-group">
-								<input [type]="showPassword ? 'text' : 'password'" class="form-control" formControlName="password" id="password" placeholder="Password" />
+								<input [type]="showPassword ? 'text' : 'password'" class="form-control"
+									formControlName="password" id="password" placeholder="Password" />
 								<button type="button" class="btn btn-outline-secondary"
 									(click)="togglePasswordVisibility()">
 									<i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
 								</button>
 							</div>
-							<div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="text-danger small mt-1">
-								<span *ngIf="registerForm.get('password')?.errors?.['required']">El campo Password es obligatorio.</span>
-								<span *ngIf="registerForm.get('password')?.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres.</span>
-								<span *ngIf="registerForm.get('password')?.errors?.['pattern']">La contraseña debe contener mayúsculas, minúsculas y números.</span>
+							<div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+								class="text-danger small mt-1">
+								<span *ngIf="registerForm.get('password')?.errors?.['required']">El campo Password es
+									obligatorio.</span>
+								<span *ngIf="registerForm.get('password')?.errors?.['minlength']">La contraseña debe
+									tener al menos 8 caracteres.</span>
+								<span *ngIf="registerForm.get('password')?.errors?.['pattern']">La contraseña debe
+									contener mayúsculas, minúsculas y números.</span>
 							</div>
 						</div>
 
 						<div class="form-group mb-3">
 							<label class="form-label" for="confirmpassword">Confirmar Password</label>
 							<div class="input-group">
-								<input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control" formControlName="confirmpassword" id="confirmpassword" placeholder="Confirma Password" />
-								<button type="button"
-									class="btn btn-outline-secondary"
+								<input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control"
+									formControlName="confirmpassword" id="confirmpassword"
+									placeholder="Confirma Password" />
+								<button type="button" class="btn btn-outline-secondary"
 									(click)="toggleConfirmPasswordVisibility()">
 									<i [class]="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
 								</button>
 							</div>
-							<div *ngIf="registerForm.get('confirmpassword')?.invalid && registerForm.get('confirmpassword')?.touched" class="text-danger small mt-1">
+							<div *ngIf="registerForm.get('confirmpassword')?.invalid && registerForm.get('confirmpassword')?.touched"
+								class="text-danger small mt-1">
 								El campo Confirmar Password es obligatorio.
 							</div>
 						</div>
 
 						<div class="d-grid mt-3">
-							<button type="submit" [disabled]="registerForm.invalid || isLoading" class="btn btn-primary">
+							<button type="submit" [disabled]="registerForm.invalid || isLoading"
+								class="btn btn-primary">
 								<span *ngIf="!isLoading">Crear Cuenta</span>
 								<span *ngIf="isLoading">Creando cuenta...</span>
 							</button>
 						</div>
+						<!-- Mensaje de error -->
+						<div *ngIf="errorMessage" class="alert alert-danger mb-3" role="alert">
+							{{ errorMessage }}
+						</div>
+
+						<!-- Mensaje de éxito -->
+						<div *ngIf="successMessage" class="alert alert-success mb-3" role="alert">
+							{{ successMessage }}
+						</div>
+
 
 						<!-- Spinner de carga -->
 						<div *ngIf="isLoading" class="text-center mt-3">
