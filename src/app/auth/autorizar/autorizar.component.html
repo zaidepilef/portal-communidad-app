@@ -9,7 +9,6 @@
 				<div class="card-body text-center">
 					<div class="mb-4">
 						<h3 class="mb-0"><b>Autorización de Acceso</b></h3>
-						<p class="text-muted">Verificando su autorización...</p>
 					</div>
 
 					<!-- Spinner de carga -->
@@ -34,23 +33,12 @@
 						</p>
 					</div>
 
-					<!-- Iconos de estado -->
-					<div class="mb-4">
-						<div *ngIf="success" class="text-success">
-							<i class="fas fa-check-circle fa-3x"></i>
-						</div>
-						<div *ngIf="error" class="text-danger">
-							<i class="fas fa-times-circle fa-3x"></i>
-						</div>
-					</div>
 
 					<!-- Botones de acción -->
 					<div class="mt-4">
-
 						<button *ngIf="error" class="btn btn-secondary me-2" (click)="reintentar()">
 							Reintentar
 						</button>
-
 					</div>
 
 
@@ -58,7 +46,7 @@
 					<!-- Información adicional -->
 					<div class="mt-3 text-muted">
 						<small>
-							<i class="fas fa-info-circle"></i>
+
 							Este enlace es solo para comprobar que el usuario tiene acceso a la plataforma.
 						</small>
 					</div>

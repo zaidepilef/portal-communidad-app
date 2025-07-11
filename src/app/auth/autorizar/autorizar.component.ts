@@ -39,8 +39,10 @@ export class AutorizarComponent implements OnInit {
 			return;
 		}
 
-		// Verificar el token con el backend
-		this.verificarToken();
+		// Esperar 5 segundos antes de verificar el token con el backend
+		setTimeout(() => {
+			this.verificarToken();
+		}, 5000);
 	}
 
 	verificarToken() {
@@ -99,7 +101,7 @@ export class AutorizarComponent implements OnInit {
 		setTimeout(() => {
 			this.isLoading = false;
 			this.router.navigate(['/auth/activacion']);
-		}, 8000);
+		}, 5000);
 	}
 
 
@@ -109,6 +111,10 @@ export class AutorizarComponent implements OnInit {
 		this.error = false;
 		this.success = false;
 		this.mensaje = 'Reintentando verificación...';
-		this.verificarToken();
+		// Esperar 5 segundos antes de volver a verificar el token
+		setTimeout(() => {
+			this.verificarToken();
+		}, 5000);
+		return; // Para evitar que se llame dos veces
 	}
 }

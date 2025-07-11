@@ -84,26 +84,37 @@ export class RegisterComponent {
 		this.successMessage = null;
 
 
-		this.callService();
+		// Simula un retardo de 5 segundos antes de llamar al servicio
+		setTimeout(() => {
+			this.callService();
+		}, 5000);
 	}
 
 	// llamada a service aqui
 	callService() {
 
-
+		// Lógica para manejar la respuesta del registro y mostrar mensajes en español
 		this.authService.register(this.registerRequest).subscribe({
 			next: (response) => {
+				this.isLoading = false;
 				this.registerResponse = response;
-				console.log('Respuesta del servicio:', response);
-				if (response.success) {
-					console.log('Registro exitoso:', response.message);
+				if (response && response.success) {
+					this.successMessage = response.message || '¡Cuenta creada correctamente! Por favor revisa tu correo para activar la cuenta.';
+					this.errorMessage = null;
+					// Opcional: podrías redirigir al login o limpiar el formulario aquí
+					this.registerForm.reset();
 				} else {
-					console.log('Error en registro:', response.message);
+					this.errorMessage = response?.message || 'Ocurrió un error al crear la cuenta.';
+					this.successMessage = null;
 				}
 			},
 			error: (err) => {
-				console.error('Error llamando al servicio:', err);
+				this.isLoading = false;
+				this.errorMessage = err.error?.message || 'Ocurrió un error inesperado al crear la cuenta.';
+				this.successMessage = null;
 			}
 		});
+
+
 	}
 }
