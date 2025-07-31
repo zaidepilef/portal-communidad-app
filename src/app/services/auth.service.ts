@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { Injectable, OnDestroy } from '@angular/core';
+import { RegisterRequest, RegisterResponse } from '../models/register-model';
 
 @Injectable({
 	providedIn: 'root' // ✅ Esto asegura que Angular inyecte el servicio globalmente
@@ -17,24 +18,37 @@ export class AuthService implements OnDestroy {
 
 	// Iniciar sesión
 	login(credentials: { email: string; password: string }): Observable<any> {
-		return this.http.post(`${this.apiUrl}/login`, credentials); // 👈 Cierra la conexión si el servicio se destruye
+		return this.http.post(`${this.apiUrl}/login`, credentials);
 	}
 
-
-
-	// Iniciar sesión
-	register(credentials: {
-		usernam: string;
-		email: string;
-		password: string;
-		confirmpassword: string;
-	}): Observable<any> {
-		return this.http.post(`${this.apiUrl}/register`, credentials); // 👈 Cierra la conexión si el servicio se destruye
+	// Registrar usuario
+	register(credentials: RegisterRequest): Observable<RegisterResponse> {
+		return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, credentials);
 	}
 
-	// Iniciar sesión
+	// Recuperar contraseña
 	recovery(credentials: { email: string; }): Observable<any> {
-		return this.http.post(`${this.apiUrl}/recovery`, credentials); // 👈 Cierra la conexión si el servicio se destruye
+		return this.http.post(`${this.apiUrl}/recovery`, credentials);
+	}
+
+	// Validar token de activación
+	validateActivationToken(token: string): Observable<any> {
+		return this.http.post(`${this.apiUrl}/activation/validate`, { token });
+	}
+
+	// Activar cuenta
+	activateAccount(userData: any): Observable<any> {
+		return this.http.post(`${this.apiUrl}/activation/activate`, userData);
+	}
+
+	// Verificar código de email
+	verifyEmailCode(verificationData: { email: string; code: string }): Observable<any> {
+		return this.http.post(`${this.apiUrl}/activation/verify-email-code`, verificationData);
+	}
+
+	// Reenviar código de verificación
+	resendVerificationCode(email: string): Observable<any> {
+		return this.http.post(`${this.apiUrl}/resend-verification-code`, { email });
 	}
 
 

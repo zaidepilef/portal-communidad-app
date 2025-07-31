@@ -1,0 +1,104 @@
+<div class="auth-main">
+	<div class="auth-wrapper v3">
+		<div class="auth-form">
+			<div class="auth-header">
+				<a><img src="assets/images/logo-dark.svg" alt="logo" /></a>
+			</div>
+
+			<div class="card">
+				<div class="card-body">
+
+					<div class="mb-4">
+						<h3 class="mb-0"><b>Activación de Cuenta</b></h3>
+						<p class="text-muted">Validando su cuenta...</p>
+					</div>
+
+					<!-- Información del usuario -->
+					<div *ngIf="userInfo" class="mb-4">
+						<div class="alert alert-info">
+							<strong>Usuario:</strong> {{ userInfo.username }}<br>
+							<strong>Email:</strong> {{ userInfo.email }}
+						</div>
+					</div>
+
+					<!-- Spinner de carga -->
+					<div *ngIf="isLoading" class="mb-4">
+						<div class="spinner-border text-primary" role="status">
+							<span class="visually-hidden">Cargando...</span>
+						</div>
+					</div>
+
+					<!-- Mensaje de estado -->
+					<div class="mb-4">
+						<p [class]="error ? 'text-danger' : success ? 'text-success' : 'text-info'">
+							{{ mensaje }}
+						</p>
+					</div>
+
+					<!-- Iconos de estado -->
+					<div class="mb-4">
+						<div *ngIf="success" class="text-success">
+							<i class="fas fa-check-circle fa-3x"></i>
+						</div>
+						<div *ngIf="error" class="text-danger">
+							<i class="fas fa-times-circle fa-3x"></i>
+						</div>
+					</div>
+
+					<!-- Formulario de datos del usuario -->
+					<form [formGroup]="userDataForm" (ngSubmit)="onSubmitForm()">
+						<div class="row">
+
+							<div class="form-group mb-3">
+								<label class="form-label" for="nombre">Nombre</label>
+								<input type="text" class="form-control" formControlName="nombre" id="nombre" placeholder="su nombre" />
+
+								<div *ngIf="userDataForm.get('nombre')?.invalid && userDataForm.get('nombre')?.touched" class="text-danger small mt-1">
+									<span *ngIf="userDataForm.get('nombre')?.errors?.['required']">El campo Usuario es obligatorio.</span>
+									<span *ngIf="userDataForm.get('nombre')?.errors?.['minlength']">El usuario debe tener al menos 3 caracteres.</span>
+									<span *ngIf="userDataForm.get('nombre')?.errors?.['maxlength']">El usuario no puede exceder 30 caracteres.</span>
+								</div>
+
+							</div>
+
+							<div class="form-group mb-3">
+								<label class="form-label" for="apellido">Apellido</label>
+								<input type="text" class="form-control" formControlName="apellido" id="apellido" placeholder="su apellido" />
+
+								<div *ngIf="userDataForm.get('apellido')?.invalid && userDataForm.get('apellido')?.touched" class="text-danger small mt-1">
+									<span *ngIf="userDataForm.get('apellido')?.errors?.['required']">El apellido es obligatorio</span>
+									<span *ngIf="userDataForm.get('apellido')?.errors?.['minlength']">El apellido debe tener al menos 2 caracteres</span>
+									<span *ngIf="userDataForm.get('apellido')?.errors?.['maxlength']">El apellido no puede exceder 50 caracteres</span>
+								</div>
+							</div>
+
+							<div class="form-group mb-3">
+								<label class="form-label" for="cedula">Cedula Identidad</label>
+								<input type="text" class="form-control" formControlName="cedula" id="cedula" placeholder="rut chileno sin puntos, sin guion ni digito verificador" />
+
+								<div *ngIf="userDataForm.get('cedula')?.invalid && userDataForm.get('cedula')?.touched" class="text-danger small mt-1">
+									<span *ngIf="userDataForm.get('cedula')?.errors?.['required']">El número de documento es obligatorio</span>
+									<span *ngIf="userDataForm.get('cedula')?.errors?.['pattern']">El número debe tener entre 8 y 10 dígitos</span>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="d-grid mt-4">
+							<button type="submit" [disabled]="userDataForm.invalid" class="btn btn-primary">
+								<span *ngIf="!isLoading">Activar Cuenta</span>
+								<span *ngIf="isLoading">Activando cuenta...</span>
+							</button>
+						</div>
+
+					</form>
+
+					<!-- Información adicional -->
+					<div class="mt-3 text-muted">
+						<small><i class="fas fa-info-circle"></i>Complete sus datos para activar su cuenta.</small>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

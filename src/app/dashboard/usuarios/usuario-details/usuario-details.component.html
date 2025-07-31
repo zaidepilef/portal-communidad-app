@@ -1,0 +1,42 @@
+<div class="card shadow-sm">
+
+	<div class="card-body">
+		<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+			<div class="row">
+
+				<!-- Nombre -->
+				<div class="col">
+					<label class="form-label">User Name</label>
+					<input type="text" class="form-control" formControlName="username" [readOnly]="true"/>
+				</div>
+
+				<!-- Correo -->
+				<div class="col">
+					<label class="form-label">Email</label>
+					<input type="email" class="form-control" formControlName="email" [readOnly]="true"/>
+				</div>
+
+				<div class="col">
+					<label class="form-label">Status</label>
+					<select class="form-select" formControlName="status">
+						<option [value]="'ACTIVO'">ACTIVO</option>
+						<option [value]="'BLOQUEADO'">BLOQUEADO</option>
+						<option [value]="'NUEVO'">NUEVO</option>
+					</select>
+
+				</div>
+
+			</div>
+
+
+		</form>
+	</div>
+
+	<div class="card-footer">
+		<div class="d-flex justify-content-between align-items-center">
+			<button class="btn btn-sm btn-secondary" routerLink="/dashboard/usuarios">← Volver</button>
+			<button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Guardar Cambios</button>
+		</div>
+	</div>
+</div>
