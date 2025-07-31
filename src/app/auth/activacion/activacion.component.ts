@@ -52,10 +52,8 @@ export class ActivacionComponent implements OnInit {
 		}
 
 		if (this.tokenPerson && this.userInfo) {
-
 			this.isLoading = false;
 			this.mensaje = 'Complete sus datos para activar la cuenta.';
-
 		}
 	}
 
@@ -79,6 +77,8 @@ export class ActivacionComponent implements OnInit {
 		// Llamar al endpoint de activación con los datos del usuario
 		this.authService.activateAccount(activationData).subscribe({
 			next: (response) => {
+				console.log('this.authService.activateAccount response : ', response);
+
 				// Verificar si la respuesta tiene la estructura esperada
 				if (response && response.success === true) {
 					this.mensaje = response.message || '¡Cuenta activada exitosamente! Redirigiendo al login...';
@@ -96,15 +96,15 @@ export class ActivacionComponent implements OnInit {
 				}
 			},
 			error: (err) => {
-				console.error('Error activando cuenta:', err);
+
+				console.log('err:', err);
+				console.log(' err.error.message :', err.error.message);
 
 				// Manejar diferentes tipos de errores
-				if (err.status === 404) {
+				if (err.status === 400) {
+					this.mensaje = err.error.message || 'Error al activar la cuenta';
+				} else if (err.status === 404) {
 					this.mensaje = 'Token de activación no encontrado';
-				} else if (err.status === 400) {
-					this.mensaje = 'Token de activación inválido o ya utilizado';
-				} else if (err.status === 0) {
-					this.mensaje = 'Error de conexión. Verifique su internet.';
 				} else {
 					this.mensaje = err.error?.message || 'Error al activar la cuenta';
 				}

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { RegisterRequest, RegisterResponse } from 'src/app/models/register-model';
 
@@ -29,6 +29,8 @@ import { RegisterRequest, RegisterResponse } from 'src/app/models/register-model
  */
 export class RegisterComponent {
 	private authService = inject(AuthService); // ✅ Inyección con `inject()`
+	private router = inject(Router);
+
 	registerForm: FormGroup;
 	errorMessage: string | null = null;
 	successMessage: string | null = null;
@@ -59,15 +61,7 @@ export class RegisterComponent {
 
 	}
 
-	// Método para alternar visibilidad de password
-	togglePasswordVisibility() {
-		this.showPassword = !this.showPassword;
-	}
 
-	// Método para alternar visibilidad de confirm password
-	toggleConfirmPasswordVisibility() {
-		this.showConfirmPassword = !this.showConfirmPassword;
-	}
 
 	onSubmit() {
 		if (this.registerForm.invalid) return;
@@ -93,21 +87,28 @@ export class RegisterComponent {
 	// llamada a service aqui
 	callService() {
 
-		// Lógica para manejar la respuesta del registro y mostrar mensajes en español
-		// Si la respuesta contiene un mensaje de éxito y un enlace de activación, lo mostramos de forma clara al usuario.
-		// También podemos mostrar un mensaje especial si el email fue enviado correctamente.
-		// Este bloque se ejecuta antes de la suscripción al observable, por lo que aquí solo podrías preparar lógica previa si fuera necesario.
-		// En este punto, no hay respuesta aún, así que no se puede mostrar el mensaje aquí.
 		this.authService.register(this.registerRequest).subscribe({
 
 			next: (response) => {
 				if (response) {
 					this.isLoading = false;
-					this.successMessage = response.message + ' Activa tu cuenta usando el enlace enviado a tu correo.';
+					this.successMessage = response.message;
 					this.errorMessage = null;
 					this.registerForm.reset();
 					// Si quieres mostrar el enlace de activación directamente (por ejemplo, en desarrollo), puedes descomentar la siguiente línea:
 					// this.successMessage += ` Enlace de activación: ${response.activation_link}`;
+
+					this.router.navigate(
+						['/auth/register-code'],
+						{
+							queryParams: {
+								email: this.registerRequest.email,
+								name: this.registerRequest.username,
+								token: response?.token // si el backend devuelve un token de registro, inclúyelo aquí
+							}
+						}
+					);
+
 					return;
 
 				} else {
@@ -123,5 +124,15 @@ export class RegisterComponent {
 		});
 
 
+
+	}
+	// Método para alternar visibilidad de password
+	togglePasswordVisibility() {
+		this.showPassword = !this.showPassword;
+	}
+
+	// Método para alternar visibilidad de confirm password
+	toggleConfirmPasswordVisibility() {
+		this.showConfirmPassword = !this.showConfirmPassword;
 	}
 }

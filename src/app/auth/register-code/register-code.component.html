@@ -1,0 +1,100 @@
+<div class="auth-main">
+	<div class="auth-wrapper v3">
+		<div class="auth-form">
+
+			<div class="auth-header">
+				<a href="javascript:"><img src="assets/images/logo-dark.svg" alt="logo img" /></a>
+			</div>
+
+			<div class="card my-5">
+				<div class="card-body">
+					<div class="d-flex justify-content-between align-items-end mb-4">
+						<h3 class="mb-0"><b>Verificar Cuenta</b></h3>
+					</div>
+
+					<p class="text-muted mb-3">
+						<strong>{{ userName }}</strong> Hemos enviado un código de verificación de 6 dígitos a tu email: <strong>{{ userEmail }}</strong>
+					</p>
+
+					<form [formGroup]="registerCodeForm" (ngSubmit)="onSubmit()">
+						<div class="form-group mb-4">
+							<label class="form-label" for="verificationCode">Código de Verificación</label>
+							<input
+								type="text"
+								class="form-control form-control-lg text-center"
+								formControlName="code"
+								id="verificationCode"
+								placeholder="000000"
+								maxlength="6"
+								(input)="onCodeInput($event)"
+								style="font-size: 1.5rem; letter-spacing: 0.5rem;"
+							/>
+							<div *ngIf="registerCodeForm.get('code')?.invalid && registerCodeForm.get('code')?.touched"
+								class="text-danger small mt-2">
+								<span *ngIf="registerCodeForm.get('code')?.errors?.['required']">
+									El código de verificación es obligatorio.
+								</span>
+								<span *ngIf="registerCodeForm.get('code')?.errors?.['pattern']">
+									El código debe tener exactamente 6 dígitos.
+								</span>
+							</div>
+						</div>
+
+						<div class="d-grid mb-3">
+							<button
+								type="submit"
+								[disabled]="registerCodeForm.invalid || isLoading"
+								class="btn btn-primary btn-lg">
+								<span *ngIf="!isLoading">
+									<i class="fas fa-check me-2"></i>Verificar Código
+								</span>
+								<span *ngIf="isLoading">
+									<div class="spinner-border spinner-border-sm me-2" role="status">
+										<span class="visually-hidden">Verificando...</span>
+									</div>
+									Verificando...
+								</span>
+							</button>
+						</div>
+
+						<!-- Mensaje de error -->
+						<div *ngIf="errorMessage" class="alert alert-danger mb-3" role="alert">
+							<i class="fas fa-exclamation-triangle me-2"></i>
+							{{ errorMessage }}
+						</div>
+
+						<!-- Mensaje de éxito -->
+						<div *ngIf="successMessage" class="alert alert-success mb-3" role="alert">
+							<i class="fas fa-check-circle me-2"></i>
+							{{ successMessage }}
+						</div>
+
+
+						<!-- Opción para reenviar código -->
+						<div class="text-center">
+							<p class="text-muted mb-2">¿No recibiste el código?</p>
+							<button
+								type="button"
+								class="btn btn-link p-0"
+								[disabled]="resendDisabled"
+								(click)="resendCode()">
+								<span *ngIf="!resendDisabled">
+									<i class="fas fa-paper-plane me-1"></i>Reenviar código
+								</span>
+								<span *ngIf="resendDisabled">
+									Reenviar en {{ resendCountdown }}s
+								</span>
+							</button>
+						</div>
+
+
+					</form>
+				</div>
+			</div>
+
+			<div class="auth-footer row">
+				<!-- Footer content -->
+			</div>
+		</div>
+	</div>
+</div>

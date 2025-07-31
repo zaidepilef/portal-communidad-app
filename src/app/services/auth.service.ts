@@ -41,6 +41,16 @@ export class AuthService implements OnDestroy {
 		return this.http.post(`${this.apiUrl}/activation/activate`, userData);
 	}
 
+	// Verificar código de email
+	verifyEmailCode(verificationData: { email: string; code: string }): Observable<any> {
+		return this.http.post(`${this.apiUrl}/activation/verify-email-code`, verificationData);
+	}
+
+	// Reenviar código de verificación
+	resendVerificationCode(email: string): Observable<any> {
+		return this.http.post(`${this.apiUrl}/resend-verification-code`, { email });
+	}
+
 
 	// Guardar el token y la expiración en LocalStorage
 	saveToken(response: any): void {

@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { RecoveryComponent } from './recovery/recovery.component';
 import { AutorizarComponent } from './autorizar/autorizar.component';
 import { ActivacionComponent } from './activacion/activacion.component';
+import { RegisterCodeComponent } from './register-code/register-code.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'recovery', component: RecoveryComponent },
+  { path: 'register-code', component: RegisterCodeComponent },
   { path: 'autorizar/:token', component: AutorizarComponent },
   { path: 'activacion', component: ActivacionComponent },
 ];
