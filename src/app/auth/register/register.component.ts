@@ -81,7 +81,7 @@ export class RegisterComponent {
 		// Simula un retardo de 5 segundos antes de llamar al servicio
 		setTimeout(() => {
 			this.callService();
-		}, 5000);
+		}, 1000);
 	}
 
 	// llamada a service aqui
@@ -117,8 +117,10 @@ export class RegisterComponent {
 				}
 			},
 			error: (err) => {
+				console.log('err : ', err)
+				console.log('err.error : ', err.error)
 				this.isLoading = false;
-				this.errorMessage = err.error?.message || 'Ocurrió un error inesperado al crear la cuenta.';
+				this.errorMessage = err.error?.messages || 'Ocurrió un error inesperado al crear la cuenta.';
 				this.successMessage = null;
 			}
 		});

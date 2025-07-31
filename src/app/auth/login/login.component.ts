@@ -45,33 +45,21 @@ export class LoginComponent implements OnDestroy {
 				this.isLoading = false; // ✅ Ocultar GIF al recibir respuesta
 
 				// Verificar si la respuesta tiene token
-				if (response && response.token) {
+				if (response && response.access_token) {
 					// Guardar el token
-					this.authService.saveToken(response);
-
+					this.authService.saveToken(response.access_token);
 					// Mostrar mensaje de éxito
-					this.successMessage = response.message || 'Login exitoso';
-
+					this.successMessage = response.message;
 					// Redirigir al Dashboard después de un breve delay
-					setTimeout(() => {
-						this.router.navigate(['/dashboard']);
-					}, 1500);
+					this.router.navigate(['/dashboard']);
 				} else {
 					this.errorMessage = 'Respuesta inválida del servidor';
 				}
 			},
 			error: (err) => {
 				this.isLoading = false; // ✅ Ocultar GIF si hay error
-				console.error('Error en login:', err);
-
-				// Manejar diferentes tipos de errores
-				if (err.status === 401) {
-					this.errorMessage = 'Credenciales incorrectas';
-				} else if (err.status === 0) {
-					this.errorMessage = 'Error de conexión. Verifique su internet.';
-				} else {
-					this.errorMessage = err.error?.message || 'Error en el login';
-				}
+				console.error('Error en login:', err.error);
+				this.errorMessage = err.error?.message;
 			}
 		});
 	}

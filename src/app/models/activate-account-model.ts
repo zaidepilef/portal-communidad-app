@@ -1,11 +1,10 @@
-export interface ActivateRequest {
+export interface ActivateAccountRequest {
 	token: string;
 	email: string;
 	code: string;
 }
 
-export interface ActivateResponse {
-  success: boolean;
+export interface ActivateAccountResponse {
   message?: string;
-  accessToken?: string;
+  access_token?: string;
 }

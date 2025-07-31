@@ -90,29 +90,18 @@ export class RegisterCodeComponent implements OnInit, OnDestroy {
 				this.isLoading = false;
 				this.registerCodeForm.enable();
 
-				if (response.success) {
-					this.successMessage = response.message || '¡Código verificado exitosamente! Tu cuenta ha sido activada.';
-					// Limpiar datos temporales
-					localStorage.removeItem('pendingEmail');
-					// Redirigir al login después de 2 segundos
-					setTimeout(() => {
-						this.router.navigate(['/auth/login']);
-					}, 10000);
-				} else {
-					this.errorMessage = response.message || 'Código inválido. Por favor, verifica el código enviado a tu email.';
-				}
+				this.successMessage = response.message || '¡Código verificado exitosamente! Tu cuenta ha sido activada.';
+				this.authService.saveToken(response.access_token);
+				// Limpiar datos temporales
+				// Redirigir al login después de 2 segundos
+				this.router.navigate(['/dashboard']);
 			},
 			error: (err) => {
-				this.isLoading = false;
-				this.registerCodeForm.enable();
 				console.error('Error en verificación:', err);
-				if (err.status === 400) {
-					this.errorMessage = err.error.message || 'Código inválido o expirado.';
-				} else if (err.status === 0) {
-					this.errorMessage = 'Error de conexión. Verifique su internet.';
-				} else {
-					this.errorMessage = err.error?.message || 'Error en la verificación del código.';
-				}
+				this.registerCodeForm.enable();
+				this.isLoading = false;
+				this.errorMessage = err.error?.messages.error;
+				this.successMessage = null;
 			}
 		});
 	}
