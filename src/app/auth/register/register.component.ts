@@ -95,8 +95,6 @@ export class RegisterComponent {
 					this.successMessage = response.message;
 					this.errorMessage = null;
 					this.registerForm.reset();
-					// Si quieres mostrar el enlace de activación directamente (por ejemplo, en desarrollo), puedes descomentar la siguiente línea:
-					// this.successMessage += ` Enlace de activación: ${response.activation_link}`;
 
 					this.router.navigate(
 						['/auth/register-code'],
